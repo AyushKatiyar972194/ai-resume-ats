@@ -1,0 +1,35 @@
+# Environments and secrets
+.env
+.env*.local
+!.env.example
+secrets.toml
+frontend/.streamlit/secrets.toml
+
+# Virtual environment
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pytest_cache/
+
+# Datasets
+*.csv
+
+# Logs
+*.log
+
+# ML models and weights
+*.safetensors
+*.pkl
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS generated files
+.DS_Store
+Thumbs.db
