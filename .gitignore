@@ -17,6 +17,11 @@ __pycache__/
 *$py.class
 *.pytest_cache/
 
+# Databases
+*.db
+*.sqlite3
+*.sqlite
+
 # Datasets
 *.csv
 
