@@ -111,16 +111,33 @@ h1, h2, h3, h4, h5, h6 {
 /* Main container spacing and width */
 .main .block-container {
     max-width: 1180px !important;
-    padding-top: 2rem !important;
+    padding-top: 4.75rem !important;
     padding-bottom: 4rem !important;
     padding-left: 2.5rem !important;
     padding-right: 2.5rem !important;
 }
 
-/* Header toolbar styling */
+/* Header toolbar styling - solid opaque surface to eliminate ghosting/partial seeing when scrolling */
 header[data-testid="stHeader"] {
-    background-color: transparent !important;
-    backdrop-filter: blur(8px);
+    background-color: var(--surface-bg) !important;
+    border-bottom: 1px solid var(--surface-border) !important;
+    backdrop-filter: none !important;
+    z-index: 99999 !important;
+}
+
+/* Hide Streamlit default decoration strip */
+[data-testid="stDecoration"] {
+    display: none !important;
+}
+
+/* Header action icons */
+header[data-testid="stHeader"] button,
+header[data-testid="stHeader"] [data-testid^="stBaseButton"] {
+    color: var(--text-muted) !important;
+}
+
+header[data-testid="stHeader"] button:hover {
+    color: var(--text-heading) !important;
 }
 
 /* ==========================================================================
