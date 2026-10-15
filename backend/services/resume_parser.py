@@ -1,7 +1,10 @@
-import io
-import magic
+try:
+    import magic
+except (ImportError, Exception):
+    magic = None
 from typing import Tuple, Optional, Tuple
 
+import mimetypes
 import pdfplumber
 from docx import Document
 import PyPDF2
@@ -38,14 +41,24 @@ def validate_file(file_data:bytes, filename:str)->Tuple[bool, str, Optional[str]
         ), None
     
     if file_size_bytes==0:
-        return False, 'uploade file is empty...please check the file you have uploaded and try again'
+        return False, 'uploade file is empty...please check the file you have uploaded and try again', None
     
-    try:
-        mime_type=magic.from_buffer(file_data, mime=True)
-    except Exception as e:
-        return False, f"error deteminin the file type : {e}", None
+    mime_type = None
+    if magic:
+        try:
+            mime_type = magic.from_buffer(file_data, mime=True)
+        except Exception:
+            mime_type = None
+            
+    if not mime_type:
+        guessed, _ = mimetypes.guess_type(filename)
+        mime_type = guessed
+        if not mime_type:
+            ext = filename.lower().rsplit('.', 1)[-1] if '.' in filename else ''
+            ext_map = {'pdf': 'application/pdf', 'doc': 'application/msword', 'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'}
+            mime_type = ext_map.get(ext)
     
-    if mime_type not in SUPPORTED_MIME_TYPES:
+    if not mime_type or mime_type not in SUPPORTED_MIME_TYPES:
         supported=', '.join(SUPPORTED_MIME_TYPES.keys()).upper()
         return False, (
             f'Unsupported file type: {mime_type}. '
