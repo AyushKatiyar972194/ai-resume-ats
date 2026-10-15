@@ -1,49 +1,56 @@
+import textwrap
 from typing import Any, Dict
-
 import streamlit as st
 
 from frontend.components.score_display import display_overall_score, display_score_breakdown
-from frontend.components.strengths_issues import display_strengths, display_critical_issues
+from frontend.components.strengths_issues import display_strengths_and_issues
 from frontend.components.skill_validation import display_skill_validation
 from frontend.components.jd_comparison import display_jd_comparison
 from frontend.components.detailed_feedback import display_detailed_feedback
 from frontend.components.action_items import display_action_items
 from frontend.components.recommendations import display_recommendations
 
-
 def display_results_dashboard(analysis: Dict[str, Any]) -> None:
     """
-    Render the full results page from one backend response dict.
-
-    `analysis` is the JSON body returned by POST /api/v1/analyze-resume
-    (i.e. an AnalysisResponse). No transformation is done here — every
-    section reads the fields it needs directly.
+    Render the comprehensive ATS results dashboard.
     """
+    # Top Telemetry Header Bar
+    header_html = textwrap.dedent("""
+<div class="results-header-bar">
+    <div>
+        <div class="results-meta-title">Diagnostic Audit Report</div>
+        <div class="results-meta-subtitle">Automated multi-vector evaluation against Fortune 500 ATS screening algorithms</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+        <span class="badge-pill badge-emerald">✔ Audit Complete</span>
+        <span style="font-size:0.8rem; font-weight:600; color:#64748B;">AI Engine Active</span>
+    </div>
+</div>
+""")
+    st.markdown(header_html, unsafe_allow_html=True)
+
+    # 1. Executive Overall Score Gauge
     display_overall_score(analysis)
-    st.markdown("---")
 
+    # 2. 5-Vector Component Scores
     display_score_breakdown(analysis)
-    st.markdown("---")
 
-    display_strengths(analysis.get("strengths") or [])
-    st.markdown("---")
+    # 3. Strengths vs Bottlenecks Comparative Grid
+    display_strengths_and_issues(analysis)
 
-    display_critical_issues(analysis)
-    st.markdown("---")
-
+    # 4. Contextual Skill Proofing
     display_skill_validation(analysis)
-    st.markdown("---")
 
-    # JD comparison only shows up if the user actually submitted a JD.
+    # 5. Targeted JD Comparison (if provided)
     jd_comparison = analysis.get("jd_comparison") or analysis.get("jd_match_analysis")
     if jd_comparison:
         display_jd_comparison(jd_comparison)
-        st.markdown("---")
 
-    display_detailed_feedback(analysis)
-    st.markdown("---")
-
+    # 6. Prioritized Action Checklist
     display_action_items(analysis)
-    st.markdown("---")
 
+    # 7. Deep Diagnostic Audit
+    display_detailed_feedback(analysis)
+
+    # 8. Strategic Long-Term Advisory
     display_recommendations(analysis)

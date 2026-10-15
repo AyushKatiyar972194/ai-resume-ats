@@ -64,13 +64,29 @@ elif (
     else:
         st.query_params.pop("auth_token", None)
 
-#Load custom CSS
+# Check for direct view deep linking in query params
+if "view" in st.query_params and st.query_params["view"] in ("landing", "scorer", "history", "resources"):
+    st.session_state.current_view = st.query_params["view"]
+
+# Developer / test preview support for visual verification
+if st.query_params.get("preview") == "sample":
+    import json
+    sample_path = Path("C:/Users/Ayush/.gemini/antigravity/brain/c8387dfb-cd88-41e7-8e26-10a7415efbab/sample_analysis.json")
+    if sample_path.exists():
+        try:
+            st.session_state["scorer_analysis"] = json.loads(sample_path.read_text(encoding="utf-8"))
+            if "view" not in st.query_params:
+                st.session_state.current_view = "scorer"
+        except Exception:
+            pass
+
+# Load custom CSS
 def load_css():
     try:
         css_path = Path(__file__).parent / 'assets' / 'styles.css'
-        with open(css_path, 'r') as f:
+        with open(css_path, 'r', encoding='utf-8') as f:
             return f'<style>{f.read()}</style>'
-    except FileNotFoundError:
+    except Exception:
         return ''
 
 st.markdown(load_css(), unsafe_allow_html=True)
@@ -81,32 +97,68 @@ if 'current_view' not in st.session_state:
 
 # Sidebar navigation
 with st.sidebar:
+    # Sleek Brand Header
+    st.markdown(
+        """
+        <div class="brand-sidebar-header">
+            <div class="brand-icon-sq">⚡</div>
+            <div class="brand-text-col">
+                <span class="brand-title-text">ATS INTELLIGENCE</span>
+                <span class="brand-version-badge">Enterprise v2.4</span>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.markdown("## Navigation")
+
+    cur = st.session_state.current_view
     
-    if st.button("🏠 Home", use_container_width=True):
+    # Styled Navigation buttons
+    if st.button("🏠  Home", use_container_width=True, type="primary" if cur == 'landing' else "secondary", key="nav_home"):
         st.session_state.current_view = 'landing'
+        st.query_params["view"] = 'landing'
         st.rerun()
-    
-    if st.button("🎯 ATS Scorer", use_container_width=True):
+
+    if st.button("🎯  ATS Scorer", use_container_width=True, type="primary" if cur == 'scorer' else "secondary", key="nav_scorer"):
         st.session_state.current_view = 'scorer'
+        st.query_params["view"] = 'scorer'
         st.rerun()
-    
-    if st.button("📊 History", use_container_width=True):
+
+    if st.button("📊  Scan History", use_container_width=True, type="primary" if cur == 'history' else "secondary", key="nav_history"):
         st.session_state.current_view = 'history'
+        st.query_params["view"] = 'history'
         st.rerun()
-    
-    if st.button("📚 Resources", use_container_width=True):
+
+    if st.button("📚  Playbook & Guides", use_container_width=True, type="primary" if cur == 'resources' else "secondary", key="nav_resources"):
         st.session_state.current_view = 'resources'
+        st.query_params["view"] = 'resources'
         st.rerun()
-    
+
     st.markdown("---")
-    st.markdown("### 👤 Account")
+    st.markdown("## Account & Access")
 
     from frontend.services import supabase_client
 
     if st.session_state.access_token:
-        # Signed-in state: show email + sign-out button.
-        st.caption(f"Signed in as **{st.session_state.user_email}**")
+        # Signed-in state
+        email_str = str(st.session_state.user_email or "User")
+        initial = email_str[0].upper()
+        st.markdown(
+            f"""
+            <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:10px 12px; display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+                <div style="width:32px; height:32px; border-radius:50%; background:#4F46E5; color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;">
+                    {initial}
+                </div>
+                <div style="overflow:hidden; text-overflow:ellipsis;">
+                    <div style="color:#F8FAFC; font-size:12px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{email_str}</div>
+                    <div style="color:#10B981; font-size:11px; font-weight:500;">● Active Session</div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
         if st.button("Sign out", use_container_width=True):
             supabase_client.sign_out()
             for k in ("access_token", "refresh_token", "user_id", "user_email"):
@@ -114,7 +166,7 @@ with st.sidebar:
             st.query_params.pop("auth_token", None)
             st.rerun()
     else:
-        # Signed-out state: tabs for sign-in vs sign-up + Google OAuth button.
+        # Signed-out state
         if st.session_state.auth_error:
             st.error(st.session_state.auth_error)
             st.session_state.auth_error = None
@@ -162,7 +214,7 @@ with st.sidebar:
                     st.query_params["auth_token"]  = result["refresh_token"]
                 st.rerun()
 
-        st.markdown("<div style='text-align:center; margin: 8px 0; color:#94a3b8;'>or</div>",
+        st.markdown("<div style='text-align:center; margin: 10px 0; color:#64748B; font-size:12px;'>— OR CONTINUE WITH —</div>",
                     unsafe_allow_html=True)
 
         oauth = supabase_client.google_oauth_url()
