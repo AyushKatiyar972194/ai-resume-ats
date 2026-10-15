@@ -8,7 +8,8 @@ from groq import Groq
 logger=logging.getLogger('ats_resume_scorer')
 
 
-GROQ_MODEL='llama-3.3-70b-versatile'
+GROQ_MODEL = os.getenv('GROQ_MODEL', 'qwen/qwen3.8-27b')
+FALLBACK_MODELS = ['openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'allam-2-7b']
 
 _client=None
 
@@ -76,18 +77,27 @@ Resume Text:
 {raw_text}"""
 
 def _call_groq(client:Groq, system_prompt:str, user_prompt:str)->str:
-
-    response=client.chat.completions.create(
-        model=GROQ_MODEL, 
-        messages=[
-            {'role': 'system', 'content': system_prompt},
-            {'role': 'user', 'content': user_prompt}
-        ],
-        temperature=0.0,
-        max_tokens=4096
-    )
-
-    return response.choices[0].message.content.strip()
+    models_to_try = [GROQ_MODEL] + [m for m in FALLBACK_MODELS if m != GROQ_MODEL]
+    last_exc = None
+    for model_name in models_to_try:
+        try:
+            response = client.chat.completions.create(
+                model=model_name, 
+                messages=[
+                    {'role': 'system', 'content': system_prompt},
+                    {'role': 'user', 'content': user_prompt}
+                ],
+                temperature=0.0,
+                max_tokens=4096
+            )
+            return response.choices[0].message.content.strip()
+        except Exception as exc:
+            last_exc = exc
+            if 'model_not_found' in str(exc) or '404' in str(exc) or 'does not exist' in str(exc):
+                logger.warning(f"Model {model_name} not found on Groq, trying fallback...")
+                continue
+            raise exc
+    raise last_exc
 
 def _try_parse_json(text: str) -> dict | None:
 
