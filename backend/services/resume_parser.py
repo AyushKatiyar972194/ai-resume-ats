@@ -1,8 +1,9 @@
+import io
 try:
     import magic
 except (ImportError, Exception):
     magic = None
-from typing import Tuple, Optional, Tuple
+from typing import Tuple, Optional
 
 import mimetypes
 import pdfplumber
