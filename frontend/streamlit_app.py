@@ -36,7 +36,7 @@ if (
     from frontend.services import supabase_client
     result = supabase_client.exchange_code_for_session(st.query_params["code"])
 
-    #Always clear the ?code= param so a refresh doesn't try to re-exchange.
+    # Always clear the ?code= param so a refresh doesn't try to re-exchange.
     st.query_params.clear()
     if "error" in result:
         st.session_state.auth_error = f"Google sign-in failed: {result['error']}"
@@ -45,7 +45,24 @@ if (
         st.session_state.refresh_token = result["refresh_token"]
         st.session_state.user_id       = result["user_id"]
         st.session_state.user_email    = result["email"]
+        st.query_params["auth_token"]  = result["refresh_token"]
         st.rerun()
+
+# Automatically restore session on browser refresh if token is present
+elif (
+    not st.session_state.access_token
+    and "auth_token" in st.query_params
+):
+    from frontend.services import supabase_client
+    refreshed = supabase_client.refresh_user_session(st.query_params["auth_token"])
+    if "error" not in refreshed and refreshed.get("access_token"):
+        st.session_state.access_token  = refreshed["access_token"]
+        st.session_state.refresh_token = refreshed["refresh_token"]
+        st.session_state.user_id       = refreshed["user_id"]
+        st.session_state.user_email    = refreshed["email"]
+        st.query_params["auth_token"]  = refreshed["refresh_token"]
+    else:
+        st.query_params.pop("auth_token", None)
 
 #Load custom CSS
 def load_css():
@@ -94,6 +111,7 @@ with st.sidebar:
             supabase_client.sign_out()
             for k in ("access_token", "refresh_token", "user_id", "user_email"):
                 st.session_state[k] = None
+            st.query_params.pop("auth_token", None)
             st.rerun()
     else:
         # Signed-out state: tabs for sign-in vs sign-up + Google OAuth button.
@@ -120,6 +138,7 @@ with st.sidebar:
                     st.session_state.refresh_token = result["refresh_token"]
                     st.session_state.user_id       = result["user_id"]
                     st.session_state.user_email    = result["email"]
+                    st.query_params["auth_token"]  = result["refresh_token"]
                 st.rerun()
 
         with tab_up:
@@ -140,6 +159,7 @@ with st.sidebar:
                     st.session_state.refresh_token = result["refresh_token"]
                     st.session_state.user_id       = result["user_id"]
                     st.session_state.user_email    = result["email"]
+                    st.query_params["auth_token"]  = result["refresh_token"]
                 st.rerun()
 
         st.markdown("<div style='text-align:center; margin: 8px 0; color:#94a3b8;'>or</div>",

@@ -128,6 +128,22 @@ def exchange_code_for_session(auth_code: str) -> Dict[str, Any]:
         return {'error': _humanize(exc)}
 
 
+def refresh_user_session(refresh_token: str) -> Dict[str, Any]:
+    """Restore and refresh an existing session using its refresh_token."""
+    err = _missing_config()
+    if err:
+        return {'error': err}
+    client = get_client()
+    try:
+        resp = client.auth.refresh_session(refresh_token)
+        if not resp.session or not resp.user:
+            return {'error': 'Failed to restore session'}
+        return _session_dict(resp.session, resp.user)
+    except Exception as exc:
+        logger.warning(f'refresh_user_session failed: {exc}')
+        return {'error': str(exc)}
+
+
 def sign_out() -> None:
     if _missing_config():
         return
