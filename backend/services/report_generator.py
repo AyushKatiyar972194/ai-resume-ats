@@ -86,6 +86,17 @@ def generate_html_reports(analysis_data: Dict) -> Dict[str, str]:
     jd_raw = analysis_data.get('jd_match_analysis') or analysis_data.get('jd_comparison')
     if hasattr(jd_raw, 'model_dump'):
         jd_raw = jd_raw.model_dump()
+    elif hasattr(jd_raw, '__dict__'):
+        jd_raw = jd_raw.__dict__
+
+    if jd_raw and isinstance(jd_raw, dict):
+        jd_raw.setdefault('match_percentage', jd_raw.get('keyword_match', 0.0) or 0.0)
+        jd_raw.setdefault('semantic_similarity', 0.0)
+        jd_raw.setdefault('matched_keywords', [])
+        jd_raw.setdefault('missing_keywords', [])
+        jd_raw.setdefault('skills_gap', [])
+    else:
+        jd_raw = None
 
 
     #8. Score colour (green / orange / red) 
