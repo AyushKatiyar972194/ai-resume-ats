@@ -94,7 +94,7 @@ html, body, [class*="css"] {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading) !important;
-    color: var(--text-heading) !important;
+    color: var(--text-heading);
     font-weight: 700;
     letter-spacing: -0.025em;
     line-height: 1.25;
@@ -1095,4 +1095,34 @@ hr {
     color: #818CF8;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+}
+
+/* Bottom Call to Action Dark Card */
+.cta-dark-card {
+    background: linear-gradient(135deg, #090D1A 0%, #1E293B 100%) !important;
+    border-radius: 16px !important;
+    padding: 3rem 2rem 3.5rem 2rem !important;
+    text-align: center !important;
+    color: #FFFFFF !important;
+    margin-top: 2rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15) !important;
+}
+
+.cta-dark-card h2,
+.cta-dark-card .cta-heading,
+div.cta-dark-card > h2 {
+    color: #FFFFFF !important;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.cta-dark-card p,
+.cta-dark-card .cta-desc,
+div.cta-dark-card > p {
+    color: #94A3B8 !important;
+    font-size: 1rem !important;
+    max-width: 580px !important;
+    margin: 0 auto 1.75rem auto !important;
 }

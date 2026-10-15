@@ -1,0 +1,39 @@
+services:
+  # 1. FastAPI Backend API
+  - type: web
+    name: ats-resume-backend
+    env: python
+    buildCommand: pip install -r requirements.txt && python -m spacy download en_core_web_sm && python -m spacy download en_core_web_md
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: GROQ_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_JWT_SECRET
+        sync: false
+
+  # 2. Streamlit Web App
+  - type: web
+    name: ats-resume-frontend
+    env: python
+    buildCommand: pip install streamlit requests supabase python-dotenv
+    startCommand: streamlit run frontend/streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: ats-resume-backend
+          property: host
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false

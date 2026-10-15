@@ -193,9 +193,9 @@ def render():
     # Bottom Call to Action Card
     st.markdown(
         """
-        <div style="background: linear-gradient(135deg, #090D1A 0%, #1E293B 100%); border-radius: 16px; padding: 3rem 2rem; text-align: center; color: white; margin-top: 1rem; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 25px rgba(15,23,42,0.15);">
-            <h2 style="color: #FFFFFF !important; font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem;">Ready to Supercharge Your Applications?</h2>
-            <p style="color: #94A3B8; font-size: 1rem; max-width: 580px; margin: 0 auto 1.75rem auto;">
+        <div class="cta-dark-card">
+            <h2 class="cta-heading" style="color: #FFFFFF !important;">Ready to Supercharge Your Applications?</h2>
+            <p class="cta-desc" style="color: #94A3B8 !important;">
                 Upload your resume now to uncover blind spots and get personalized feedback before recruiters look at your profile.
             </p>
         </div>
