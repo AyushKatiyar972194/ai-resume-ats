@@ -164,7 +164,7 @@ def _generate_strengths(
         strengths.append("Professional Summary provides a quick overview")
 
     if len(skills) >= 8:
-        strengths.append(f"Strong skill set — {len(skills)} skills detected")
+        strengths.append(f"Strong skill set - {len(skills)} skills detected")
     if len(action_verbs) >= 5:
         strengths.append(f"Uses {len(action_verbs)} strong action verbs in bullet points")
 
