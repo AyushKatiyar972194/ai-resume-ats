@@ -36,10 +36,10 @@ def display_action_items(analysis: Dict[str, Any]) -> None:
         return
 
     tag_styles = {
-        "critical": ("background:#FEF2F2; color:#991B1B; border:1px solid #FECACA;", "🔴 CRITICAL"),
-        "high":     ("background:#FFF7ED; color:#9A3412; border:1px solid #FED7AA;", "🟠 HIGH"),
-        "medium":   ("background:#FFFBEB; color:#92400E; border:1px solid #FDE68A;", "🟡 MODERATE"),
-        "low":      ("background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;", "🟢 LOW"),
+        "critical": ("background:#FEF2F2; color:#991B1B; border:1px solid #FECACA;", "🔴 High Priority"),
+        "high":     ("background:#FFF7ED; color:#9A3412; border:1px solid #FED7AA;", "🟠 Important"),
+        "medium":   ("background:#FFFBEB; color:#92400E; border:1px solid #FDE68A;", "🟡 Recommended"),
+        "low":      ("background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;", "🟢 Optional Polish"),
     }
 
     cards_html = []
@@ -50,8 +50,8 @@ def display_action_items(analysis: Dict[str, Any]) -> None:
 
     full_html = textwrap.dedent(f"""
 <div style="margin: 1.5rem 0 1rem 0;">
-    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Tactical Edits</div>
-    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">Prioritized Action Checklist</h3>
+    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Next Steps</div>
+    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">Recommended Changes to Make</h3>
 </div>
 {''.join(cards_html)}
 """)

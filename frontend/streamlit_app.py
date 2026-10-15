@@ -101,10 +101,10 @@ with st.sidebar:
     st.markdown(
         """
         <div class="brand-sidebar-header">
-            <div class="brand-icon-sq">⚡</div>
+            <div class="brand-icon-sq">🎯</div>
             <div class="brand-text-col">
-                <span class="brand-title-text">ATS INTELLIGENCE</span>
-                <span class="brand-version-badge">Enterprise v2.4</span>
+                <span class="brand-title-text">Resume ATS Checker</span>
+                <span class="brand-version-badge">AI Assistant</span>
             </div>
         </div>
         """,
@@ -121,23 +121,23 @@ with st.sidebar:
         st.query_params["view"] = 'landing'
         st.rerun()
 
-    if st.button("🎯  ATS Scorer", use_container_width=True, type="primary" if cur == 'scorer' else "secondary", key="nav_scorer"):
+    if st.button("🎯  Check Resume", use_container_width=True, type="primary" if cur == 'scorer' else "secondary", key="nav_scorer"):
         st.session_state.current_view = 'scorer'
         st.query_params["view"] = 'scorer'
         st.rerun()
 
-    if st.button("📊  Scan History", use_container_width=True, type="primary" if cur == 'history' else "secondary", key="nav_history"):
+    if st.button("📊  Past Reviews", use_container_width=True, type="primary" if cur == 'history' else "secondary", key="nav_history"):
         st.session_state.current_view = 'history'
         st.query_params["view"] = 'history'
         st.rerun()
 
-    if st.button("📚  Playbook & Guides", use_container_width=True, type="primary" if cur == 'resources' else "secondary", key="nav_resources"):
+    if st.button("💡  Tips & Guides", use_container_width=True, type="primary" if cur == 'resources' else "secondary", key="nav_resources"):
         st.session_state.current_view = 'resources'
         st.query_params["view"] = 'resources'
         st.rerun()
 
     st.markdown("---")
-    st.markdown("## Account & Access")
+    st.markdown("## Your Account")
 
     from frontend.services import supabase_client
 
@@ -153,7 +153,7 @@ with st.sidebar:
                 </div>
                 <div style="overflow:hidden; text-overflow:ellipsis;">
                     <div style="color:#F8FAFC; font-size:12px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{email_str}</div>
-                    <div style="color:#10B981; font-size:11px; font-weight:500;">● Active Session</div>
+                    <div style="color:#10B981; font-size:11px; font-weight:500;">● Signed In</div>
                 </div>
             </div>
             """,

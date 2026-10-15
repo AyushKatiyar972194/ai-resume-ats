@@ -14,8 +14,8 @@ def display_recommendations(analysis: Dict[str, Any]) -> None:
 
     full_html = textwrap.dedent(f"""
 <div style="margin: 1.5rem 0 1rem 0;">
-    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Strategic Advisory</div>
-    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">Long-Term Profile Recommendations</h3>
+    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Helpful Tips</div>
+    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">Advice to Make Your Resume Stand Out</h3>
 </div>
 {items_html}
 """)

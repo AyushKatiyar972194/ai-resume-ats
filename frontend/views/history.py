@@ -18,13 +18,13 @@ def render() -> None:
         <div style="margin-bottom: 2rem;">
             <div style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.25rem 0.75rem; background:#EEF2FF; border:1px solid #C7D2FE; border-radius:9999px; font-size:0.75rem; font-weight:700; color:#4F46E5; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.75rem;">
                 <span style="width:6px; height:6px; border-radius:50%; background:#4F46E5;"></span>
-                Telemetry Archive // Past Evaluations
+                Saved Reviews // Track Your Progress
             </div>
             <h1 style="font-size: 2.25rem; font-weight: 800; color: #0F172A; margin: 0 0 0.5rem 0; letter-spacing: -0.025em;">
-                Diagnostic Audit History
+                My Saved Resume Reviews
             </h1>
             <p style="font-size: 1rem; color: #64748B; margin: 0; max-width: 720px; line-height: 1.6;">
-                Track your resume score progression across versions, review previous diagnostic telemetry, and reload saved reports.
+                Review your past resume scores, track your progress as you edit, and revisit previous recommendations.
             </p>
         </div>
         """,
@@ -45,9 +45,9 @@ def render() -> None:
             """
             <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:12px; padding:1.5rem; text-align:center;">
                 <div style="font-size:1.8rem; margin-bottom:0.5rem;">🔒</div>
-                <div style="font-weight:700; font-size:1.1rem; color:#92400E; margin-bottom:0.35rem;">Authentication Required</div>
+                <div style="font-weight:700; font-size:1.1rem; color:#92400E; margin-bottom:0.35rem;">Sign In to View Past Reviews</div>
                 <div style="color:#78350F; font-size:0.9rem; max-width:480px; margin:0 auto 1rem auto;">
-                    Sign in via the left sidebar to access past ATS analyses stored securely in your private account ledger.
+                    Sign in via the left sidebar to access your past resume reviews and track your improvements over time.
                 </div>
             </div>
             """,
@@ -66,9 +66,9 @@ def render() -> None:
             """
             <div style="background:#FFFFFF; border:1px dashed #CBD5E1; border-radius:16px; padding:3.5rem 2rem; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
                 <div style="font-size:2.5rem; margin-bottom:0.75rem;">📊</div>
-                <h3 style="font-size:1.25rem; font-weight:800; color:#0F172A; margin:0 0 0.5rem 0;">No Analysis Telemetry Found</h3>
+                <h3 style="font-size:1.25rem; font-weight:800; color:#0F172A; margin:0 0 0.5rem 0;">No Saved Reviews Yet</h3>
                 <p style="color:#64748B; font-size:0.95rem; max-width:460px; margin:0 auto 1.5rem auto;">
-                    You haven't run any ATS evaluations on this account yet. Head over to the Scorer studio to assess your resume.
+                    You haven't reviewed any resumes on this account yet. Upload a resume to get your first score and personalized suggestions!
                 </p>
             </div>
             """,
@@ -76,7 +76,7 @@ def render() -> None:
         )
         c1, c2, c3 = st.columns([1, 2, 1])
         with c2:
-            if st.button("🎯  Go To ATS Scorer Studio", use_container_width=True, type="primary"):
+            if st.button("🎯  Check a Resume Now", use_container_width=True, type="primary"):
                 st.session_state.current_view = "scorer"
                 st.query_params["view"] = "scorer"
                 st.rerun()
@@ -91,15 +91,15 @@ def render() -> None:
         f"""
         <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:1.25rem 1.75rem; margin-bottom:1.5rem; display:grid; grid-template-columns:repeat(3, 1fr); gap:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
             <div>
-                <div style="font-size:0.75rem; font-weight:700; color:#64748B; text-transform:uppercase; letter-spacing:0.05em;">Total Audits Run</div>
+                <div style="font-size:0.75rem; font-weight:700; color:#64748B; text-transform:uppercase; letter-spacing:0.05em;">Resumes Reviewed</div>
                 <div style="font-family:'Plus Jakarta Sans', sans-serif; font-size:1.75rem; font-weight:800; color:#0F172A;">{len(history)}</div>
             </div>
             <div>
-                <div style="font-size:0.75rem; font-weight:700; color:#64748B; text-transform:uppercase; letter-spacing:0.05em;">Average ATS Score</div>
+                <div style="font-size:0.75rem; font-weight:700; color:#64748B; text-transform:uppercase; letter-spacing:0.05em;">Average Score</div>
                 <div style="font-family:'Plus Jakarta Sans', sans-serif; font-size:1.75rem; font-weight:800; color:#4F46E5;">{avg_score:.0f} / 100</div>
             </div>
             <div>
-                <div style="font-size:0.75rem; font-weight:700; color:#64748B; text-transform:uppercase; letter-spacing:0.05em;">Peak Record Score</div>
+                <div style="font-size:0.75rem; font-weight:700; color:#64748B; text-transform:uppercase; letter-spacing:0.05em;">Highest Score</div>
                 <div style="font-family:'Plus Jakarta Sans', sans-serif; font-size:1.75rem; font-weight:800; color:#10B981;">{max_score:.0f} / 100</div>
             </div>
         </div>
@@ -154,11 +154,11 @@ def render() -> None:
                 )
                 if jd_comparison:
                     match_p = float(jd_comparison.get("match_percentage", 0))
-                    st.markdown(f"<div style='margin-top:6px; font-size:0.85rem;'>🎯 <strong>Target JD Match:</strong> {match_p:.0f}%</div>", unsafe_allow_html=True)
+                    st.markdown(f"<div style='margin-top:6px; font-size:0.85rem;'>🎯 <strong>Target Job Match:</strong> {match_p:.0f}%</div>", unsafe_allow_html=True)
 
             c_act1, c_act2 = st.columns([3, 1])
             with c_act1:
-                if st.button("🔍 Load Full Diagnostic Report Into Studio", key=f"load_{idx}"):
+                if st.button("🔍 View Full Report", key=f"load_{idx}"):
                     st.session_state["scorer_analysis"] = analysis
                     st.session_state.current_view = "scorer"
                     st.query_params["view"] = "scorer"

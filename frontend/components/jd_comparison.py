@@ -8,8 +8,8 @@ def display_jd_comparison(jd_comparison: Optional[Dict[str, Any]]) -> None:
     st.markdown(
         """
         <div style="margin: 1.5rem 0 1rem 0;">
-            <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Target Alignment</div>
-            <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">Job Description Keyword & Semantic Gap</h3>
+            <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Job Match</div>
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">How Well Your Resume Fits This Job Posting</h3>
         </div>
         """,
         unsafe_allow_html=True
@@ -30,26 +30,26 @@ def display_jd_comparison(jd_comparison: Optional[Dict[str, Any]]) -> None:
         <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.85rem; font-weight: 700; color: #0F172A;">Direct Keyword Overlap</span>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #0F172A;">Matching Keywords</span>
                     <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 800; color: {match_color};">{match_pct:.0f}%</span>
                 </div>
                 <div class="breakdown-track">
                     <div class="breakdown-bar" style="width: {min(100.0, match_pct):.1f}%; background: {match_color};"></div>
                 </div>
                 <div style="font-size: 0.775rem; color: #64748B; margin-top: 0.35rem;">
-                    Matches hard skills, methodologies, and tools present in the JD.
+                    Exact skills, tools, and terms from the job posting found in your resume.
                 </div>
             </div>
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.85rem; font-weight: 700; color: #0F172A;">Semantic & Contextual Similarity</span>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #0F172A;">Experience Match</span>
                     <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 800; color: #6366F1;">{semantic * 100:.0f}%</span>
                 </div>
                 <div class="breakdown-track">
                     <div class="breakdown-bar" style="width: {min(100.0, semantic * 100):.1f}%; background: linear-gradient(90deg, #4F46E5, #06B6D4);"></div>
                 </div>
                 <div style="font-size: 0.775rem; color: #64748B; margin-top: 0.35rem;">
-                    Measures deep contextual relevance of experience bullets to the target role.
+                    How closely your overall work experience aligns with the job requirements.
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@ def display_jd_comparison(jd_comparison: Optional[Dict[str, Any]]) -> None:
             f"""
             <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem 1.5rem; height: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #F1F5F9;">
-                    <span style="font-weight: 700; font-size: 0.95rem; color: #065F46;">✔ Matched JD Keywords ({len(matched)})</span>
+                    <span style="font-weight: 700; font-size: 0.95rem; color: #065F46;">✔ Matching Keywords ({len(matched)})</span>
                     <span class="badge-pill badge-emerald">In Resume</span>
                 </div>
                 <div class="chips-cloud">
@@ -81,11 +81,11 @@ def display_jd_comparison(jd_comparison: Optional[Dict[str, Any]]) -> None:
             f"""
             <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem 1.5rem; height: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #F1F5F9;">
-                    <span style="font-weight: 700; font-size: 0.95rem; color: #991B1B;">⚠️ Missing JD Keywords ({len(missing)})</span>
-                    <span class="badge-pill badge-rose">High Impact</span>
+                    <span style="font-weight: 700; font-size: 0.95rem; color: #991B1B;">⚠️ Missing Keywords ({len(missing)})</span>
+                    <span class="badge-pill badge-rose">Recommended to Add</span>
                 </div>
                 <div class="chips-cloud">
-                    {''.join([f'<span class="keyword-chip chip-missing">❌ {kw}</span>' for kw in missing[:20]]) if missing else '<span style="color:#059669; font-size:0.85rem;">All primary JD keywords are included in your resume!</span>'}
+                    {''.join([f'<span class="keyword-chip chip-missing">❌ {kw}</span>' for kw in missing[:20]]) if missing else '<span style="color:#059669; font-size:0.85rem;">All primary job keywords are included in your resume!</span>'}
                 </div>
             </div>
             """,
@@ -97,8 +97,8 @@ def display_jd_comparison(jd_comparison: Optional[Dict[str, Any]]) -> None:
         st.markdown(
             f"""
             <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 10px; padding: 1rem 1.25rem; font-size: 0.875rem;">
-                <strong style="color: #92400E;">🎯 Strategic Domain Gap:</strong>
-                <span style="color: #78350F; margin-left: 6px;">The JD places emphasis on: <strong>{', '.join(gap[:8])}</strong>. We recommend weaving these capabilities into your summary and project bullets.</span>
+                <strong style="color: #92400E;">💡 Recommended Skills to Add:</strong>
+                <span style="color: #78350F; margin-left: 6px;">The job posting emphasizes: <strong>{', '.join(gap[:8])}</strong>. If you have experience with these, try adding them to your resume summary or bullet points.</span>
             </div>
             """,
             unsafe_allow_html=True

@@ -5,10 +5,10 @@ import streamlit as st
 SEVERITY_ORDER = ["critical", "high", "medium", "low"]
 
 SEVERITY_META = {
-    "critical": {"label": "Critical Risk", "icon": "🚨", "bg": "#FEF2F2", "color": "#991B1B", "border": "#FECACA"},
-    "high":     {"label": "High Priority", "icon": "⚠️", "bg": "#FFF7ED", "color": "#9A3412", "border": "#FED7AA"},
-    "medium":   {"label": "Moderate / Medium", "icon": "💡", "bg": "#FFFBEB", "color": "#92400E", "border": "#FDE68A"},
-    "low":      {"label": "Minor Polish", "icon": "✨", "bg": "#ECFDF5", "color": "#065F46", "border": "#A7F3D0"},
+    "critical": {"label": "High Priority Fixes", "icon": "🚨", "bg": "#FEF2F2", "color": "#991B1B", "border": "#FECACA"},
+    "high":     {"label": "Recommended Improvements", "icon": "⚠️", "bg": "#FFF7ED", "color": "#9A3412", "border": "#FED7AA"},
+    "medium":   {"label": "Helpful Suggestions", "icon": "💡", "bg": "#FFFBEB", "color": "#92400E", "border": "#FDE68A"},
+    "low":      {"label": "Minor Touchups", "icon": "✨", "bg": "#ECFDF5", "color": "#065F46", "border": "#A7F3D0"},
 }
 
 def _normalize_level(raw_level: str) -> str:
@@ -31,7 +31,7 @@ def _group_by_severity(issues: List[Dict[str, Any]]) -> Dict[str, List[Dict[str,
 def _render_issue(issue: Dict[str, Any]) -> None:
     level = _normalize_level(issue.get("severity_level", ""))
     meta = SEVERITY_META.get(level, SEVERITY_META["low"])
-    title = issue.get("issue_title", "Diagnostic Finding")
+    title = issue.get("issue_title", "Suggestion")
     impact = issue.get("ats_impact", "")
     explanation = issue.get("explanation", "")
     where = issue.get("where_it_appears", "")
@@ -39,7 +39,7 @@ def _render_issue(issue: Dict[str, Any]) -> None:
     action_items = issue.get("action_items") or []
     example = issue.get("example_improvement", "")
 
-    impact_badge = f'<span style="font-size:0.775rem; color:#64748B; font-weight:500;">ATS Impact: {impact}</span>' if impact else ''
+    impact_badge = f'<span style="font-size:0.775rem; color:#64748B; font-weight:500;">Why it matters: {impact}</span>' if impact else ''
     banner = textwrap.dedent(f"""
 <div style="background:{meta['bg']}; border-left:4px solid {meta['color']}; border:1px solid {meta['border']}; border-left-width:4px; border-radius:8px; padding:0.85rem 1.15rem; margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
     <div style="display:flex; align-items:center; gap:0.6rem;">
@@ -51,19 +51,19 @@ def _render_issue(issue: Dict[str, Any]) -> None:
 """)
     st.markdown(banner, unsafe_allow_html=True)
 
-    with st.expander("🔍 View Remediation Guide & Example", expanded=False):
+    with st.expander("💡 How to fix this & example rewrite", expanded=False):
         if explanation:
-            st.markdown(f"**Root Cause:** {explanation}")
+            st.markdown(f"**Why this matters:** {explanation}")
         if where:
-            st.markdown(f"**Section Detected:** `{where}`")
+            st.markdown(f"**Where we found it:** `{where}`")
         if how_to_fix:
-            st.markdown(f"**Recommended Fix:** {how_to_fix}")
+            st.markdown(f"**How to fix it:** {how_to_fix}")
         if action_items:
-            st.markdown("**Action Checklist:**")
+            st.markdown("**Steps to take:**")
             for item in action_items:
                 st.markdown(f"- {item}")
         if example:
-            st.markdown("**Before vs After Improvement:**")
+            st.markdown("**Example rewrite (Before & After):**")
             st.code(example, language="text")
 
 def display_detailed_feedback(analysis: Dict[str, Any]) -> None:
@@ -73,8 +73,8 @@ def display_detailed_feedback(analysis: Dict[str, Any]) -> None:
 
     header_html = textwrap.dedent("""
 <div style="margin: 1.5rem 0 1rem 0;">
-    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Deep Diagnostic Audit</div>
-    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">Detailed Issue-by-Issue Remediation</h3>
+    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">In-Depth Feedback</div>
+    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">Step-by-Step Fixes for Each Issue</h3>
 </div>
 """)
     st.markdown(header_html, unsafe_allow_html=True)

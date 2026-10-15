@@ -14,16 +14,16 @@ def display_results_dashboard(analysis: Dict[str, Any]) -> None:
     """
     Render the comprehensive ATS results dashboard.
     """
-    # Top Telemetry Header Bar
+    # Top Header Bar
     header_html = textwrap.dedent("""
 <div class="results-header-bar">
     <div>
-        <div class="results-meta-title">Diagnostic Audit Report</div>
-        <div class="results-meta-subtitle">Automated multi-vector evaluation against Fortune 500 ATS screening algorithms</div>
+        <div class="results-meta-title">Resume Review Report</div>
+        <div class="results-meta-subtitle">Detailed feedback and suggestions based on standard recruiter screening criteria</div>
     </div>
     <div style="display:flex; align-items:center; gap:0.75rem;">
-        <span class="badge-pill badge-emerald">✔ Audit Complete</span>
-        <span style="font-size:0.8rem; font-weight:600; color:#64748B;">AI Engine Active</span>
+        <span class="badge-pill badge-emerald">✔ Review Complete</span>
+        <span style="font-size:0.8rem; font-weight:600; color:#64748B;">AI Assistant Ready</span>
     </div>
 </div>
 """)

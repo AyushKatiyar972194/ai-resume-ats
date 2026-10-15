@@ -7,13 +7,13 @@ def render():
         <div style="margin-bottom: 2rem;">
             <div style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.25rem 0.75rem; background:#EEF2FF; border:1px solid #C7D2FE; border-radius:9999px; font-size:0.75rem; font-weight:700; color:#4F46E5; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.75rem;">
                 <span style="width:6px; height:6px; border-radius:50%; background:#4F46E5;"></span>
-                Field Manual // Standards & Guidelines
+                Career Guide // Best Practices
             </div>
             <h1 style="font-size: 2.25rem; font-weight: 800; color: #0F172A; margin: 0 0 0.5rem 0; letter-spacing: -0.025em;">
-                ATS Optimization Playbook
+                Resume & ATS Best Practices Guide
             </h1>
             <p style="font-size: 1rem; color: #64748B; margin: 0; max-width: 720px; line-height: 1.6;">
-                Master the technical rules of Applicant Tracking Systems. Understand how automated parsers evaluate layout, tokenize keywords, and score candidate relevance.
+                Simple, practical advice to help your resume sail through applicant tracking systems and catch the eye of hiring managers.
             </p>
         </div>
         """,
@@ -26,53 +26,53 @@ def render():
     <div class="comparison-card">
         <div class="comparison-header">
             <span style="width:28px; height:28px; border-radius:6px; background:#ECFDF5; color:#059669; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.9rem;">✔</span>
-            <span class="comparison-title" style="color:#065F46;">ATS-Proven Best Practices</span>
+            <span class="comparison-title" style="color:#065F46;">What Works Best</span>
         </div>
         <div class="bullet-item">
             <strong style="color:#0F172A; width:130px; flex-shrink:0;">Section Headers:</strong>
-            <span>Use universal headers (Work Experience, Education, Skills, Projects). Avoid creative names like "Where I've Been".</span>
+            <span>Use standard headings (Work Experience, Education, Skills, Projects). Avoid informal titles like "Where I've Been".</span>
         </div>
         <div class="bullet-item">
-            <strong style="color:#0F172A; width:130px; flex-shrink:0;">Metric Quantifiers:</strong>
-            <span>Start bullets with strong action verbs and finish with measurable business outcomes (e.g. "reduced latency by 34%").</span>
+            <strong style="color:#0F172A; width:130px; flex-shrink:0;">Quantified Results:</strong>
+            <span>Start bullets with strong action verbs and include measurable results (e.g. "reduced loading time by 35%").</span>
         </div>
         <div class="bullet-item">
-            <strong style="color:#0F172A; width:130px; flex-shrink:0;">Skill Substantiation:</strong>
-            <span>Ensure every core technical tool listed in your Skills section appears at least once in your experience bullets.</span>
+            <strong style="color:#0F172A; width:130px; flex-shrink:0;">Prove Your Skills:</strong>
+            <span>Ensure the core skills you list are backed up with examples in your work experience or project bullets.</span>
         </div>
         <div class="bullet-item">
-            <strong style="color:#0F172A; width:130px; flex-shrink:0;">File Architecture:</strong>
-            <span>Export clean text-based PDFs or DOCX. Ensure text can be selected and copied with standard cursor tools.</span>
+            <strong style="color:#0F172A; width:130px; flex-shrink:0;">Standard Format:</strong>
+            <span>Save as a clean text-based PDF or DOCX file. Make sure you can select and highlight the text with your cursor.</span>
         </div>
         <div class="bullet-item">
-            <strong style="color:#0F172A; width:130px; flex-shrink:0;">Standard Typography:</strong>
-            <span>Stick to web-safe fonts (Inter, Calibri, Arial, Helvetica, Georgia) at 10–12pt body size.</span>
+            <strong style="color:#0F172A; width:130px; flex-shrink:0;">Clean Typography:</strong>
+            <span>Stick to common fonts (Inter, Calibri, Arial, Helvetica, Georgia) at a readable 10–12pt body font size.</span>
         </div>
     </div>
     <div class="comparison-card">
         <div class="comparison-header">
             <span style="width:28px; height:28px; border-radius:6px; background:#FEF2F2; color:#DC2626; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.9rem;">✕</span>
-            <span class="comparison-title" style="color:#991B1B;">Critical Screening Traps</span>
+            <span class="comparison-title" style="color:#991B1B;">Common Mistakes to Avoid</span>
         </div>
         <div class="bullet-item">
             <strong style="color:#0F172A; width:130px; flex-shrink:0;">Complex Tables:</strong>
-            <span>Avoid nested HTML/Word tables. 68% of ATS parsers scramble table columns into unordered text blobs.</span>
+            <span>Avoid nested tables and text boxes. Many automated scanners scramble table text into disordered words.</span>
         </div>
         <div class="bullet-item">
             <strong style="color:#0F172A; width:130px; flex-shrink:0;">Header/Footer Text:</strong>
-            <span>Never put contact details in the page header or footer margin. Many parsers omit margin content entirely.</span>
+            <span>Never put contact details in document headers or footers. Many parsers skip margin content completely.</span>
         </div>
         <div class="bullet-item">
-            <strong style="color:#0F172A; width:130px; flex-shrink:0;">Graphics & Icons:</strong>
-            <span>Avoid progress bars, rating stars, and logos. Parsers interpret them as unreadable binary glyphs or missing tokens.</span>
+            <strong style="color:#0F172A; width:130px; flex-shrink:0;">Icons & Rating Bars:</strong>
+            <span>Avoid skill rating stars or progress bars. Scanners cannot read them and treat them as missing skills.</span>
         </div>
         <div class="bullet-item">
             <strong style="color:#0F172A; width:130px; flex-shrink:0;">Keyword Stuffing:</strong>
-            <span>Do not hide white-text keywords. Modern NLP models flag artificial density and disqualify candidate profiles.</span>
+            <span>Do not hide white text or spam keywords. Modern screening systems easily flag artificial repetition.</span>
         </div>
         <div class="bullet-item">
-            <strong style="color:#0F172A; width:130px; flex-shrink:0;">Multi-Column Layout:</strong>
-            <span>Avoid 2-column or sidebar CV templates. Parsers often read across columns horizontally, distorting sentences.</span>
+            <strong style="color:#0F172A; width:130px; flex-shrink:0;">Multi-Column Layouts:</strong>
+            <span>Avoid two-column or magazine-style resumes. Parsers read across columns horizontally, jumbling sentences.</span>
         </div>
     </div>
 </div>
@@ -82,16 +82,16 @@ def render():
     # Industry Keyword Taxonomy
     taxonomy_header = textwrap.dedent("""
 <div style="margin: 2rem 0 1rem 0;">
-    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Taxonomy & Ontology</div>
-    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">High-Value ATS Keyword Clusters</h3>
+    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Popular Keywords</div>
+    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">In-Demand Keywords by Role</h3>
 </div>
 """)
     st.markdown(taxonomy_header, unsafe_allow_html=True)
 
     tab_swe, tab_data, tab_lead = st.tabs([
-        "💻 Software & AI Engineering",
-        "📊 Data & Cloud Infrastructure",
-        "🚀 Technical Product & Leadership"
+        "💻 Software Engineering",
+        "📊 Data & AI",
+        "🚀 Product & Leadership"
     ])
 
     with tab_swe:

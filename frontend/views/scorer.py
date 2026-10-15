@@ -34,25 +34,25 @@ def _show_backend_error(exc: Exception) -> None:
 
 def _summary_text(analysis: dict) -> str:
     score = analysis.get("ATS_score", analysis.get("ats_score", 0))
-    lines = [f"ATS RESUME INTELLIGENCE REPORT", f"OVERALL ATS SCORE: {score:.0f}/100", "="*40, ""]
+    lines = [f"RESUME REVIEW REPORT", f"OVERALL RESUME SCORE: {score:.0f}/100", "="*40, ""]
     
     comp = analysis.get("component_scores") or {}
     if comp:
-        lines.append("COMPONENT BREAKDOWN:")
+        lines.append("SCORE BREAKDOWN:")
         for k, v in comp.items():
             lines.append(f"  - {k.replace('_', ' ').title()}: {v}")
         lines.append("")
 
     if analysis.get("strengths"):
-        lines.append("STRENGTHS:")
+        lines.append("WHAT'S WORKING WELL (STRENGTHS):")
         lines.extend(f"  - {s}" for s in analysis["strengths"])
         lines.append("")
     if analysis.get("critical_issues"):
-        lines.append("CRITICAL BOTTLEENECKS:")
+        lines.append("THINGS TO IMPROVE:")
         lines.extend(f"  - {s}" for s in analysis["critical_issues"])
         lines.append("")
     if analysis.get("suggestions"):
-        lines.append("RECOMMENDATIONS:")
+        lines.append("RECOMMENDED FIXES:")
         lines.extend(f"  - {s}" for s in analysis["suggestions"])
     return "\n".join(lines)
 
@@ -62,9 +62,9 @@ def _render_export_buttons(analysis: dict) -> None:
         <div style="margin: 2.5rem 0 1.25rem 0; padding-top: 1.5rem; border-top: 1px solid #E2E8F0;">
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div>
-                    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Deliverables & Artifacts</div>
-                    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">Export Diagnostic Deliverables</h3>
-                    <p style="font-size: 0.875rem; color: #64748B; margin: 0.25rem 0 0 0;">Download your formatted ATS audit report or plain-text action summary</p>
+                    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Save & Share</div>
+                    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">Download Your Resume Report</h3>
+                    <p style="font-size: 0.875rem; color: #64748B; margin: 0.25rem 0 0 0;">Save your full review as a PDF or download a quick action checklist to guide your edits.</p>
                 </div>
                 <span class="badge-pill badge-indigo">PDF + TXT</span>
             </div>
@@ -75,9 +75,9 @@ def _render_export_buttons(analysis: dict) -> None:
     
     c1, c2 = st.columns(2)
     with c1:
-        if st.button("📑 Generate Executive PDF Report", use_container_width=True, type="primary"):
+        if st.button("📑 Generate PDF Report", use_container_width=True, type="primary"):
             try:
-                with st.spinner("Compiling high-resolution PDF report on backend..."):
+                with st.spinner("Generating your full PDF report..."):
                     pdf_bytes = api_client.generate_pdf(
                         analysis,
                         access_token=st.session_state.get("access_token"),
@@ -90,7 +90,7 @@ def _render_export_buttons(analysis: dict) -> None:
             st.download_button(
                 "⬇️ Download PDF Report",
                 data=st.session_state["scorer_pdf_bytes"],
-                file_name="ats_resume_intelligence_report.pdf",
+                file_name="resume_review_report.pdf",
                 mime="application/pdf",
                 use_container_width=True,
                 key="download_pdf_report",
@@ -98,9 +98,9 @@ def _render_export_buttons(analysis: dict) -> None:
 
     with c2:
         st.download_button(
-            "📄 Download Action Summary (.txt)",
+            "📄 Download Action Checklist (.txt)",
             data=_summary_text(analysis),
-            file_name="ats_diagnostic_summary.txt",
+            file_name="resume_action_checklist.txt",
             mime="text/plain",
             use_container_width=True,
             key="download_summary",
@@ -113,13 +113,13 @@ def render() -> None:
         <div style="margin-bottom: 2rem;">
             <div style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.25rem 0.75rem; background:#EEF2FF; border:1px solid #C7D2FE; border-radius:9999px; font-size:0.75rem; font-weight:700; color:#4F46E5; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.75rem;">
                 <span style="width:6px; height:6px; border-radius:50%; background:#4F46E5;"></span>
-                Diagnostic Studio // Multi-Vector Audit
+                Instant Resume Review // 5-Point Check
             </div>
             <h1 style="font-size: 2.25rem; font-weight: 800; color: #0F172A; margin: 0 0 0.5rem 0; letter-spacing: -0.025em;">
-                ATS Resume Scorer & Match Studio
+                Resume Checker & Job Matcher
             </h1>
             <p style="font-size: 1rem; color: #64748B; margin: 0; max-width: 720px; line-height: 1.6;">
-                Upload your resume for multi-vector screening emulation (Formatting, Keywords, Content Quality, Skill Proof, and ATS Compliance), or benchmark directly against a specific job posting.
+                Upload your resume to see your overall score and get personalized recommendations, or compare your resume against a specific job description to find missing keywords.
             </p>
         </div>
         """,
@@ -130,14 +130,14 @@ def render() -> None:
     st.markdown(
         """
         <div style="font-size:0.8rem; font-weight:700; color:#0F172A; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.4rem;">
-            Select Evaluation Scope:
+            Choose your review type:
         </div>
         """,
         unsafe_allow_html=True
     )
     analysis_mode = st.radio(
-        "Select Evaluation Scope",
-        ["General ATS Benchmark", "Job Description Targeted Match"],
+        "Choose your review type",
+        ["General Resume Review", "Match with a Job Description"],
         horizontal=True,
         label_visibility="collapsed"
     )
@@ -151,16 +151,16 @@ def render() -> None:
         st.markdown(
             """
             <div style="font-weight: 700; font-size: 0.95rem; color: #0F172A; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
-                <span>📄 Candidate Resume</span>
+                <span>📄 Your Resume</span>
                 <span class="badge-pill badge-indigo">PDF, DOC, DOCX</span>
             </div>
             """,
             unsafe_allow_html=True
         )
         resume_file = st.file_uploader(
-            "Candidate Resume File",
+            "Upload Your Resume File",
             type=["pdf", "doc", "docx"],
-            help="Supported: PDF, DOC, DOCX (up to 5 MB)",
+            help="Supports PDF, DOC, and DOCX files up to 5 MB",
             key="resume_upload",
             label_visibility="collapsed"
         )
@@ -179,12 +179,12 @@ def render() -> None:
     jd_text = ""
 
     with col_jd:
-        if analysis_mode == "Job Description Targeted Match":
+        if analysis_mode == "Match with a Job Description":
             st.markdown(
                 """
                 <div style="font-weight: 700; font-size: 0.95rem; color: #0F172A; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
                     <span>📋 Target Job Description</span>
-                    <span class="badge-pill badge-emerald">Keyword Alignment</span>
+                    <span class="badge-pill badge-emerald">Compare & Tailor</span>
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -209,7 +209,7 @@ def render() -> None:
                 jd_text = st.text_area(
                     "Job Description Text",
                     height=130,
-                    placeholder="Paste the job description or role requirements here...",
+                    placeholder="Paste the job description or role requirements here to check how well your resume matches...",
                     key="jd_text",
                     label_visibility="collapsed"
                 )
@@ -219,17 +219,17 @@ def render() -> None:
             st.markdown(
                 """
                 <div style="font-weight: 700; font-size: 0.95rem; color: #0F172A; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
-                    <span>📋 General Assessment Mode</span>
-                    <span class="badge-pill badge-indigo">5-Vector Scope</span>
+                    <span>📋 What We Review</span>
+                    <span class="badge-pill badge-indigo">5 Key Areas</span>
                 </div>
                 <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:1.25rem; font-size:0.875rem; color:#475569; line-height:1.6; height:152px; display:flex; flex-direction:column; justify-content:center;">
-                    <div>Analyzing universal ATS parameters:</div>
+                    <div>Scoring standard recruitment criteria:</div>
                     <div style="margin-top:0.4rem; font-size:0.8rem; color:#64748B;">
-                        • Structure & Layout Parsing (20%)<br>
-                        • Core Technical Keywords (25%)<br>
-                        • Action-Oriented Impact Metrics (25%)<br>
-                        • Project-to-Skill Evidence (15%)<br>
-                        • Format Compliance (15%)
+                        • Layout & Formatting (20%) — Clean structure that scanners can easily parse<br>
+                        • Keywords & Terms (25%) — In-demand skills and industry terminology<br>
+                        • Impact & Measurable Results (25%) — Strong action verbs with clear metrics<br>
+                        • Skills Backed by Projects (15%) — Real proof for listed skills<br>
+                        • ATS Compatibility (15%) — Standard fonts, headers, and file format
                     </div>
                 </div>
                 """,
@@ -246,8 +246,8 @@ def render() -> None:
             """
             <div style="background:#F8FAFC; border:1px dashed #CBD5E1; border-radius:12px; padding:1.75rem; text-align:center; color:#64748B;">
                 <div style="font-size:1.5rem; margin-bottom:0.25rem;">📄</div>
-                <div style="font-weight:600; font-size:0.95rem; color:#334155;">Upload your resume above to begin the ATS scan</div>
-                <div style="font-size:0.8rem; color:#94A3B8; margin-top:2px;">Supports PDF and DOCX files up to 5 MB</div>
+                <div style="font-weight:600; font-size:0.95rem; color:#334155;">Upload your resume above to get your instant score and recommendations</div>
+                <div style="font-size:0.8rem; color:#94A3B8; margin-top:2px;">Supports PDF and Word documents up to 5 MB</div>
             </div>
             """,
             unsafe_allow_html=True
@@ -263,12 +263,12 @@ def render() -> None:
             """
             <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:12px; padding:1.25rem 1.5rem; margin-bottom:1rem; display:flex; align-items:center; justify-content:space-between;">
                 <div>
-                    <strong style="color:#92400E; font-size:0.95rem;">Authentication Required</strong>
+                    <strong style="color:#92400E; font-size:0.95rem;">Please Sign In to Review</strong>
                     <div style="color:#78350F; font-size:0.85rem; margin-top:2px;">
-                        Please sign in or create an account via the left sidebar to run the analysis and save it to your history.
+                        Sign in via the left sidebar to analyze your resume and save it to your history.
                     </div>
                 </div>
-                <span class="badge-pill badge-amber">Sign In Sidebar</span>
+                <span class="badge-pill badge-amber">Sign In on Sidebar</span>
             </div>
             """,
             unsafe_allow_html=True
@@ -278,7 +278,7 @@ def render() -> None:
     # Trigger Button
     col_b1, col_b2, col_b3 = st.columns([1, 2, 1])
     with col_b2:
-        analyze = st.button("⚡  Run Deep ATS Diagnostic", use_container_width=True, type="primary")
+        analyze = st.button("⚡  Analyze My Resume", use_container_width=True, type="primary")
 
     if not analyze:
         if st.session_state.get("scorer_analysis"):
@@ -291,10 +291,10 @@ def render() -> None:
     st.session_state.pop("scorer_pdf_bytes", None)
     st.session_state.pop("scorer_analysis", None)
 
-    job_description = _read_jd(jd_file, jd_text) if analysis_mode == "Job Description Targeted Match" else ""
+    job_description = _read_jd(jd_file, jd_text) if analysis_mode == "Match with a Job Description" else ""
 
     try:
-        with st.spinner("Reverse-engineering ATS filters & scoring resume... (10–25s)"):
+        with st.spinner("Reviewing your resume and checking ATS compatibility... (takes ~10 seconds)"):
             analysis = api_client.analyze_resume(
                 resume_file=resume_file,
                 access_token=access_token,
@@ -305,6 +305,6 @@ def render() -> None:
         return
 
     st.session_state["scorer_analysis"] = analysis
-    st.success("✔ Analysis complete! Full diagnostic telemetry generated below.")
+    st.success("✔ Review complete! Here is your personalized feedback report below.")
     display_results_dashboard(analysis)
     _render_export_buttons(analysis)

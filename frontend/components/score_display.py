@@ -4,49 +4,49 @@ from typing import Any, Dict
 import streamlit as st
 
 COMPONENTS = [
-    ("Formatting & Structure", "formatting", 20, "📐", "Evaluates layout, font choice, sections, and parseability."),
-    ("Keywords & Industry Terms", "keywords", 25, "🔑", "Assesses technical depth, hard skills, and domain taxonomy."),
-    ("Content Quality & Impact", "content", 25, "📈", "Measures action verbs, metrics, business results, and clarity."),
-    ("Skill Proof Validation", "skill_validation", 15, "🛡️", "Verifies claimed skills against real experience bullets."),
-    ("ATS Filter Compliance", "ats_compatibility", 15, "🤖", "Tests against table traps, unreadable glyphs, and column bugs."),
+    ("Layout & Formatting", "formatting", 20, "📐", "How clearly sections, headings, and fonts are organized."),
+    ("Keywords & Skills", "keywords", 25, "🔑", "Relevant industry terms and technologies found in your resume."),
+    ("Impact & Action Verbs", "content", 25, "📈", "Clear bullet points with measurable results and active language."),
+    ("Skills Backed by Projects", "skill_validation", 15, "🛡️", "Whether listed skills are supported by real project examples."),
+    ("ATS Readability", "ats_compatibility", 15, "🤖", "Ensures your resume won't get scrambled by hiring software."),
 ]
 
 def _get_tier_info(score: float):
     if score >= 85:
         return {
-            "tier": "Top 10% Candidate (Interview Ready)",
+            "tier": "Interview Ready!",
             "color": "#10B981",
             "bg": "#ECFDF5",
             "border": "#A7F3D0",
-            "percentile": "Top 8th Percentile",
-            "desc": "Your resume displays superior ATS compatibility, strong keyword density, and clear impact metrics."
+            "percentile": "Top 10% Candidate",
+            "desc": "Your resume looks great! It is easy for ATS scanners to read, includes strong keywords, and highlights measurable results."
         }
     elif score >= 70:
         return {
-            "tier": "Competitive Profile (Minor Polish Needed)",
+            "tier": "Competitive Profile",
             "color": "#4F46E5",
             "bg": "#EEF2FF",
             "border": "#C7D2FE",
-            "percentile": "Top 28th Percentile",
-            "desc": "Solid foundation that passes most automated filters. Address the flagged items to reach the 90+ interview tier."
+            "percentile": "Good Foundation",
+            "desc": "Solid foundation! You're in good shape for most job applications. Making a few recommended tweaks can help you reach the top tier."
         }
     elif score >= 50:
         return {
-            "tier": "Average Profile (Significant Filter Risk)",
+            "tier": "Needs Some Polish",
             "color": "#F59E0B",
             "bg": "#FFFBEB",
             "border": "#FDE68A",
-            "percentile": "50th Percentile",
-            "desc": "At risk of automated rejection by strict ATS systems (Workday, Taleo). Key technical terms and quantified results are missing."
+            "percentile": "Moderate Match",
+            "desc": "Your resume may get overlooked by automated filters. Adding more specific keywords and measurable achievements will help it stand out."
         }
     else:
         return {
-            "tier": "Critical Hazard (Overhaul Required)",
+            "tier": "Needs Attention",
             "color": "#EF4444",
             "bg": "#FEF2F2",
             "border": "#FECACA",
-            "percentile": "Bottom 20th Percentile",
-            "desc": "Major formatting or keyword deficiencies detected. Automated screeners will likely reject this resume before a human sees it."
+            "percentile": "Action Recommended",
+            "desc": "Your resume is missing important keywords or has formatting issues that could prevent recruiters from seeing your full potential."
         }
 
 def display_overall_score(analysis: Dict[str, Any]) -> None:
@@ -83,14 +83,14 @@ def display_overall_score(analysis: Dict[str, Any]) -> None:
                 {tier['percentile']}
             </span>
         </div>
-        <div class="score-tier-headline">ATS Pass Probability: {score_clamped:.0f}%</div>
+        <div class="score-tier-headline">Overall Resume Strength: {score_clamped:.0f} / 100</div>
         <div class="score-interpretation-text">{interpretation}</div>
         <div style="display: flex; gap: 1rem; font-size: 0.8rem; color: #64748B;">
-            <span>📐 5 Vectors Evaluated</span>
+            <span>📐 5 Core Areas Checked</span>
             <span>•</span>
-            <span>🤖 Fortune 500 Calibrated</span>
+            <span>🎯 Recruiter Friendly</span>
             <span>•</span>
-            <span>⚡ Deterministic Weights</span>
+            <span>💡 Actionable Feedback</span>
         </div>
     </div>
 </div>
@@ -107,10 +107,10 @@ def display_score_breakdown(analysis: Dict[str, Any]) -> None:
         pct = (val_clamped / max_score) * 100.0 if max_score else 0
 
         if pct >= 80:
-            status_chip = '<span class="badge-pill badge-emerald">OPTIMIZED</span>'
+            status_chip = '<span class="badge-pill badge-emerald">GREAT</span>'
             bar_color = "linear-gradient(90deg, #10B981, #34D399)"
         elif pct >= 60:
-            status_chip = '<span class="badge-pill badge-amber">ACCEPTABLE</span>'
+            status_chip = '<span class="badge-pill badge-amber">GOOD</span>'
             bar_color = "linear-gradient(90deg, #F59E0B, #FBBF24)"
         else:
             status_chip = '<span class="badge-pill badge-rose">NEEDS WORK</span>'
@@ -140,8 +140,8 @@ def display_score_breakdown(analysis: Dict[str, Any]) -> None:
 
     full_html = textwrap.dedent(f"""
 <div style="margin: 1.5rem 0 1rem 0;">
-    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Dimension Analysis</div>
-    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">5-Vector Component Breakdown</h3>
+    <div style="font-size: 0.775rem; font-weight: 700; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;">Score Breakdown</div>
+    <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">How You Scored Across 5 Key Areas</h3>
 </div>
 <div class="breakdown-grid">
     {''.join(cards_html)}
