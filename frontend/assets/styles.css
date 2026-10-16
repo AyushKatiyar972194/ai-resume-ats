@@ -1470,3 +1470,315 @@ div.cta-dark-card > p {
     max-width: 580px !important;
     margin: 0 auto 1.75rem auto !important;
 }
+
+/* ==========================================================================
+   DESKTOP BASE UTILITY STYLES FOR RESPONSIVE COMPONENTS
+   ========================================================================== */
+.preview-mockup-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+}
+
+.preview-score-pane {
+    text-align: center;
+    border-right: 1px solid #E2E8F0;
+    padding-right: 1.5rem;
+}
+
+.preview-scores-subgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    font-size: 0.825rem;
+}
+
+.history-metrics-summary {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1.25rem 1.75rem;
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* ==========================================================================
+   MULTI-DEVICE RESPONSIVE SYSTEM (TABLETS, MOBILES, ALL SCREEN SIZES)
+   ========================================================================== */
+
+/* 1. TABLETS & LAPTOPS (max-width: 1024px) */
+@media screen and (max-width: 1024px) {
+    .main .block-container {
+        padding-top: 4.25rem !important;
+        padding-left: 1.75rem !important;
+        padding-right: 1.75rem !important;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.25rem !important;
+    }
+
+    .flow-step-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.25rem !important;
+    }
+
+    .score-hero-card {
+        grid-template-columns: 200px 1fr !important;
+        gap: 1.75rem !important;
+        padding: 1.75rem !important;
+    }
+
+    .component-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* 2. MOBILES & PHONES (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    /* Fluid workspace container */
+    .main .block-container {
+        padding-top: 3.5rem !important;
+        padding-bottom: 2.5rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* Mobile off-canvas drawer sidebar */
+    section[data-testid="stSidebar"] {
+        width: min(340px, 86vw) !important;
+        box-shadow: 0 0 35px rgba(0, 0, 0, 0.75) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+        z-index: 999999 !important;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stSidebarContent"] {
+        padding: 1.25rem 1rem !important;
+    }
+
+    /* Mobile header toolbar */
+    header[data-testid="stHeader"] {
+        height: 3.25rem !important;
+        padding: 0 0.5rem !important;
+    }
+
+    /* Streamlit columns stacking vertically on mobile */
+    div[data-testid="stHorizontalBlock"] {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+    }
+
+    div[data-testid="stHorizontalBlock"] > div[data-testid="column"] {
+        width: 100% !important;
+        min-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+
+    /* Hero section on mobile */
+    .hero-wrapper {
+        padding: 1.5rem 0.5rem 1rem 0.5rem !important;
+    }
+
+    .hero-title {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+        letter-spacing: -0.02em !important;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem !important;
+        line-height: 1.55 !important;
+    }
+
+    /* Metrics row on mobile */
+    .hero-stats-row {
+        flex-wrap: wrap !important;
+        gap: 1.25rem 1.5rem !important;
+        justify-content: space-around !important;
+        margin: 1.25rem auto 2rem auto !important;
+        padding-top: 1.25rem !important;
+    }
+
+    .hero-stat-item {
+        flex: 1 1 40% !important;
+        text-align: center !important;
+    }
+
+    .hero-stat-num {
+        font-size: 1.75rem !important;
+    }
+
+    .hero-stat-label {
+        font-size: 0.75rem !important;
+    }
+
+    /* Feature grids and 3-step cards stack to 1 column */
+    .features-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .flow-step-container {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    /* Results Dashboard Score Hero Card */
+    .score-hero-card {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+        justify-items: center !important;
+        padding: 1.5rem 1rem !important;
+        gap: 1.25rem !important;
+    }
+
+    .score-details-col {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    .score-details-col > div[style*="display: flex"] {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+
+    .score-tier-headline {
+        font-size: 1.15rem !important;
+    }
+
+    .score-interpretation-text {
+        font-size: 0.85rem !important;
+    }
+
+    /* Results Header Bar */
+    .results-header-bar {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.75rem !important;
+        padding: 1rem 1.15rem !important;
+    }
+
+    /* 5-Vector breakdown grid: 1 column on mobile */
+    .component-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem !important;
+    }
+
+    /* Strengths vs Bottlenecks grid: 1 column on mobile */
+    .strengths-issues-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    /* 2-Column DOs vs DONTs in Tips & Guides */
+    .comparison-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    /* Mockup Preview Window in Landing */
+    .preview-window {
+        padding: 0 !important;
+        border-radius: 12px !important;
+    }
+
+    .preview-mockup-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        padding: 0.75rem !important;
+    }
+
+    .preview-score-pane {
+        border-right: none !important;
+        border-bottom: 1px solid #E2E8F0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 1rem !important;
+    }
+
+    .preview-scores-subgrid {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem !important;
+    }
+
+    /* Bottom CTA Card on mobile */
+    .cta-dark-card {
+        padding: 2rem 1.25rem 2.5rem 1.25rem !important;
+        border-radius: 12px !important;
+    }
+
+    .cta-dark-card h2,
+    .cta-dark-card .cta-heading,
+    div.cta-dark-card > h2 {
+        font-size: 1.5rem !important;
+    }
+
+    .cta-dark-card p,
+    .cta-dark-card .cta-desc,
+    div.cta-dark-card > p {
+        font-size: 0.9rem !important;
+    }
+
+    /* History page summary stats on mobile */
+    .history-metrics-summary {
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem !important;
+        padding: 1rem !important;
+        text-align: center !important;
+    }
+
+    /* Touch-friendly buttons (minimum 44px tap targets for mobile usability) */
+    .stButton > button,
+    [data-testid="stFormSubmitButton"] button,
+    a.sidebar-google-btn,
+    section[data-testid="stSidebar"] div.stButton > button {
+        min-height: 44px !important;
+        font-size: 0.925rem !important;
+    }
+
+    /* Touch-friendly text inputs */
+    section[data-testid="stSidebar"] div[data-testid="stTextInputRootElement"],
+    div[data-testid="stTextInputRootElement"] {
+        min-height: 44px !important;
+    }
+}
+
+/* 3. EXTRA SMALL SMARTPHONES (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    .main .block-container {
+        padding-left: 0.65rem !important;
+        padding-right: 0.65rem !important;
+    }
+
+    .hero-title {
+        font-size: 1.7rem !important;
+    }
+
+    .hero-stat-item {
+        flex: 1 1 100% !important;
+    }
+
+    .bullet-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+    }
+
+    .bullet-item strong {
+        width: 100% !important;
+    }
+
+    /* Radio button options full width on small screens */
+    div[role="radiogroup"] {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+}

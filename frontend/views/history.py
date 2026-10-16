@@ -89,7 +89,7 @@ def render() -> None:
 
     st.markdown(
         f"""
-        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:1.25rem 1.75rem; margin-bottom:1.5rem; display:grid; grid-template-columns:repeat(3, 1fr); gap:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+        <div class="history-metrics-summary">
             <div>
                 <div style="font-size:0.75rem; font-weight:700; color:#64748B; text-transform:uppercase; letter-spacing:0.05em;">Resumes Reviewed</div>
                 <div style="font-family:'Plus Jakarta Sans', sans-serif; font-size:1.75rem; font-weight:800; color:#0F172A;">{len(history)}</div>

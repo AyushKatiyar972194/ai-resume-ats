@@ -64,18 +64,18 @@ def render():
                 <span class="window-dot dot-green"></span>
                 <span class="window-title">sample-resume-review.pdf — Preview</span>
             </div>
-            <div style="display: grid; grid-template-columns: 200px 1fr; gap: 2rem; align-items: center; padding: 0.5rem 1rem;">
-                <div style="text-align: center; border-right: 1px solid #E2E8F0; padding-right: 1.5rem;">
+            <div class="preview-mockup-grid">
+                <div class="preview-score-pane">
                     <div style="font-size: 0.75rem; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Overall Resume Score</div>
                     <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 3.5rem; font-weight: 800; color: #10B981; line-height: 1;">88</div>
                     <div style="font-size: 0.8rem; font-weight: 700; color: #047857; margin-top: 0.5rem; background: #ECFDF5; border: 1px solid #A7F3D0; padding: 2px 8px; border-radius: 9999px; display: inline-block;">Top 10% Candidate</div>
                 </div>
                 <div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 6px;">
                         <span style="font-weight: 700; font-size: 0.95rem; color: #0F172A;">How Your Resume Performs</span>
                         <span class="badge-pill badge-emerald">✔ Ready for Recruiters</span>
                     </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.825rem;">
+                    <div class="preview-scores-subgrid">
                         <div style="background: #F8FAFC; padding: 8px 12px; border-radius: 8px; border: 1px solid #E2E8F0;">
                             <span style="color: #64748B;">Keywords & Terms:</span> <strong style="color: #0F172A;">24/25 (96%)</strong>
                         </div>
