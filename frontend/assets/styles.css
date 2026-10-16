@@ -1753,9 +1753,8 @@ div.cta-dark-card > p {
     /* Collapse button (inside sidebar) */
     button[aria-label="Collapse sidebar"],
     section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"] {
-        background: rgba(255, 255, 255, 0.08) !important;
-        color: #FFFFFF !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        background: rgba(255, 255, 255, 0.12) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
         border-radius: 8px !important;
         width: 36px !important;
         height: 36px !important;
@@ -1763,18 +1762,31 @@ div.cta-dark-card > p {
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
+        cursor: pointer !important;
         transition: all 0.2s ease !important;
     }
 
     button[aria-label="Collapse sidebar"]:hover,
     section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"]:hover {
-        background: rgba(255, 255, 255, 0.18) !important;
-        border-color: rgba(255, 255, 255, 0.3) !important;
+        background: rgba(255, 255, 255, 0.22) !important;
+        border-color: rgba(255, 255, 255, 0.35) !important;
     }
 
     button[aria-label="Collapse sidebar"] span,
     section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"] span {
-        color: #FFFFFF !important;
+        display: none !important;
+    }
+
+    button[aria-label="Collapse sidebar"]::before,
+    section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"]::before {
+        content: "" !important;
+        display: block !important;
+        width: 14px !important;
+        height: 14px !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: contain !important;
     }
 
     /* Streamlit columns stacking vertically on mobile */
