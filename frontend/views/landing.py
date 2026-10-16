@@ -205,9 +205,7 @@ def render():
     
     col_x, col_y, col_z = st.columns([1, 2, 1])
     with col_y:
-        st.markdown("<div style='margin-top: -30px;'>", unsafe_allow_html=True)
         if st.button("🚀  Check Your Resume Now", use_container_width=True, type="primary", key="cta_bottom"):
             st.session_state.current_view = 'scorer'
             st.query_params["view"] = 'scorer'
             st.rerun()
-        st.markdown("</div>", unsafe_allow_html=True)
