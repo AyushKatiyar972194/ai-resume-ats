@@ -192,121 +192,429 @@ section[data-testid="stSidebar"] hr {
     margin: 1.5rem 0 !important;
 }
 
-/* Sidebar Navigation Buttons */
-section[data-testid="stSidebar"] button,
-section[data-testid="stSidebar"] .stButton > button,
-section[data-testid="stSidebar"] button[kind="secondary"],
-section[data-testid="stSidebar"] [data-testid^="stBaseButton"],
-section[data-testid="stSidebar"] [data-testid^="baseButton-"] {
-    background: rgba(255, 255, 255, 0.05) !important;
-    color: #E2E8F0 !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: var(--radius-md) !important;
-    padding: 0.65rem 1rem !important;
+/* Navigation Section Label */
+.nav-section-title {
+    font-size: 0.725rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.09em !important;
+    color: #64748B !important;
+    margin-bottom: 0.6rem !important;
+    padding-left: 0.25rem !important;
+}
+
+/* Sidebar Navigation Items (strictly scoped to nav buttons) */
+section[data-testid="stSidebar"] div[class*="st-key-nav_"] button,
+section[data-testid="stSidebar"] div.stButton > button:not([data-testid*="FormSubmit"]) {
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: #CBD5E1 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 10px !important;
+    padding: 0.65rem 0.95rem !important;
     font-weight: 500 !important;
-    font-size: 0.925rem !important;
+    font-size: 0.9rem !important;
     text-align: left !important;
     justify-content: flex-start !important;
     display: flex !important;
     align-items: center !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    margin-bottom: 0.4rem !important;
+    margin-bottom: 0.45rem !important;
     box-shadow: none !important;
+    width: 100% !important;
 }
 
-section[data-testid="stSidebar"] button:hover,
-section[data-testid="stSidebar"] .stButton > button:hover {
-    background: rgba(255, 255, 255, 0.12) !important;
+section[data-testid="stSidebar"] div[class*="st-key-nav_"] button:hover,
+section[data-testid="stSidebar"] div.stButton > button:not([data-testid*="FormSubmit"]):hover {
+    background: rgba(255, 255, 255, 0.09) !important;
     color: #FFFFFF !important;
-    border-color: rgba(99, 102, 241, 0.5) !important;
+    border-color: rgba(99, 102, 241, 0.4) !important;
     transform: translateX(3px) !important;
 }
 
 /* Active navigation item styling */
-section[data-testid="stSidebar"] button[kind="primary"],
-section[data-testid="stSidebar"] .stButton > button[kind="primary"],
-section[data-testid="stSidebar"] [data-testid^="baseButton-primary"] {
-    background: linear-gradient(135deg, rgba(79, 70, 229, 0.45) 0%, rgba(99, 102, 241, 0.3) 100%) !important;
+section[data-testid="stSidebar"] div[class*="st-key-nav_"] button[kind="primary"],
+section[data-testid="stSidebar"] div[class*="st-key-nav_"] button[data-testid*="primary"] {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.4) 0%, rgba(99, 102, 241, 0.25) 100%) !important;
     color: #FFFFFF !important;
-    border: 1px solid rgba(99, 102, 241, 0.6) !important;
+    border: 1px solid rgba(99, 102, 241, 0.65) !important;
     font-weight: 700 !important;
     box-shadow: 0 0 16px -2px rgba(79, 70, 229, 0.4) !important;
 }
 
-/* Sidebar Form & Inputs */
-section[data-testid="stSidebar"] input[type="text"],
-section[data-testid="stSidebar"] input[type="password"] {
-    background-color: var(--nav-bg-card) !important;
-    border: 1px solid var(--nav-border) !important;
-    color: var(--nav-text-primary) !important;
-    border-radius: var(--radius-md) !important;
-    padding: 0.6rem 0.85rem !important;
-    font-size: 0.875rem !important;
-    transition: all 0.2s ease !important;
+/* Divider separating Nav from Account */
+.sidebar-section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 30%, rgba(255, 255, 255, 0.12) 70%, transparent 100%);
+    margin: 1.5rem 0 1.25rem 0;
 }
 
-section[data-testid="stSidebar"] input[type="text"]:focus,
-section[data-testid="stSidebar"] input[type="password"]:focus {
-    border-color: var(--brand-accent) !important;
-    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25) !important;
+/* ==========================================================================
+   SIDEBAR ACCOUNT & AUTHENTICATION CARD SYSTEM
+   ========================================================================== */
+.sidebar-auth-header {
+    margin-bottom: 1rem;
+    padding: 0 0.2rem;
 }
 
-/* Sidebar tabs */
-section[data-testid="stSidebar"] [data-baseweb="tab-list"] {
-    background-color: var(--nav-bg-card) !important;
-    border-radius: var(--radius-md) !important;
+.sidebar-auth-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.675rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #818CF8;
+    background: rgba(79, 70, 229, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    padding: 2px 8px;
+    border-radius: 9999px;
+    margin-bottom: 0.45rem;
+}
+
+.auth-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #6366F1;
+    box-shadow: 0 0 8px #6366F1;
+    display: inline-block;
+}
+
+.sidebar-auth-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #F8FAFC;
+    letter-spacing: -0.015em;
+    margin-bottom: 0.15rem;
+}
+
+.sidebar-auth-subtitle {
+    font-size: 0.775rem;
+    color: #94A3B8;
+    line-height: 1.4;
+}
+
+/* Modern Segmented Tab Switcher */
+section[data-testid="stSidebar"] [data-testid="stTabs"],
+section[data-testid="stSidebar"] [data-baseweb="tab-list"],
+section[data-testid="stSidebar"] [role="tablist"] {
+    background: #0B1120 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 10px !important;
     padding: 3px !important;
-    border: 1px solid var(--nav-border) !important;
+    display: flex !important;
+    width: 100% !important;
+    gap: 3px !important;
     margin-bottom: 0.85rem !important;
 }
 
-section[data-testid="stSidebar"] [data-baseweb="tab"] {
-    color: var(--nav-text-muted) !important;
+/* Tab buttons */
+section[data-testid="stSidebar"] [data-testid="stTab"],
+section[data-testid="stSidebar"] [data-baseweb="tab"],
+section[data-testid="stSidebar"] button[role="tab"] {
+    flex: 1 1 0 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0.5rem 0.5rem !important;
+    border-radius: 8px !important;
     font-size: 0.825rem !important;
     font-weight: 600 !important;
-    padding: 0.4rem 0.75rem !important;
-    border-radius: var(--radius-sm) !important;
-    border-bottom: none !important;
-}
-
-section[data-testid="stSidebar"] [aria-selected="true"] {
-    background-color: var(--brand-primary) !important;
-    color: #FFFFFF !important;
-}
-
-/* Sidebar Submit Button */
-section[data-testid="stSidebar"] [data-testid="stFormSubmitButton"] > button {
-    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-accent) 100%) !important;
-    color: #FFFFFF !important;
+    color: #94A3B8 !important;
+    background: transparent !important;
     border: none !important;
+    border-bottom: none !important;
+    transition: all 0.2s ease !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stTab"]:hover,
+section[data-testid="stSidebar"] [data-baseweb="tab"]:hover,
+section[data-testid="stSidebar"] button[role="tab"]:hover {
+    color: #F8FAFC !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Active tab state */
+section[data-testid="stSidebar"] [data-testid="stTab"][aria-selected="true"],
+section[data-testid="stSidebar"] [data-baseweb="tab"][aria-selected="true"],
+section[data-testid="stSidebar"] button[role="tab"][aria-selected="true"] {
+    background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%) !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.45) !important;
+}
+
+/* Remove default Streamlit tab borders & underline bar */
+section[data-testid="stSidebar"] [data-baseweb="tab-border"],
+section[data-testid="stSidebar"] [data-baseweb="tab-highlight"],
+section[data-testid="stSidebar"] [data-testid="stTabBorder"] {
+    display: none !important;
+    height: 0 !important;
+}
+
+/* Sidebar Forms */
+section[data-testid="stSidebar"] [data-testid="stForm"] {
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+/* Form Input Labels */
+section[data-testid="stSidebar"] label[data-testid="stWidgetLabel"],
+section[data-testid="stSidebar"] label {
+    font-size: 0.775rem !important;
     font-weight: 600 !important;
-    padding: 0.65rem 1rem !important;
-    border-radius: var(--radius-md) !important;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
-    transition: all 0.2s ease !important;
+    color: #CBD5E1 !important;
+    margin-bottom: 0.3rem !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
 }
 
-section[data-testid="stSidebar"] [data-testid="stFormSubmitButton"] > button:hover {
-    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.45) !important;
-    transform: translateY(-1px) !important;
+/* Input Root Container */
+section[data-testid="stSidebar"] div[data-testid="stTextInputRootElement"],
+section[data-testid="stSidebar"] div[data-baseweb="input"] {
+    background-color: #0B1120 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 9px !important;
+    overflow: hidden !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Continue with Google button in sidebar */
-section[data-testid="stSidebar"] [data-testid="stLinkButton"] > a {
-    background-color: var(--nav-bg-card) !important;
-    color: var(--nav-text-primary) !important;
-    border: 1px solid var(--nav-border) !important;
-    border-radius: var(--radius-md) !important;
-    font-weight: 500 !important;
+section[data-testid="stSidebar"] div[data-testid="stTextInputRootElement"]:focus-within,
+section[data-testid="stSidebar"] div[data-baseweb="input"]:focus-within {
+    border-color: #6366F1 !important;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Input Field */
+section[data-testid="stSidebar"] input[data-testid="stTextInputField"],
+section[data-testid="stSidebar"] input[type="text"],
+section[data-testid="stSidebar"] input[type="password"] {
+    background: transparent !important;
+    color: #F8FAFC !important;
+    font-size: 0.85rem !important;
+    padding: 0.6rem 0.8rem !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+section[data-testid="stSidebar"] input::placeholder {
+    color: #475569 !important;
+}
+
+/* Fix Password eye toggle button inside input! */
+section[data-testid="stSidebar"] div[data-testid="stTextInputRootElement"] button,
+section[data-testid="stSidebar"] div[data-baseweb="input"] button {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #64748B !important;
+    padding: 0 10px !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    min-height: auto !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stTextInputRootElement"] button:hover,
+section[data-testid="stSidebar"] div[data-baseweb="input"] button:hover {
+    color: #F8FAFC !important;
+    background: transparent !important;
+    transform: none !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stTextInputRootElement"] button span,
+section[data-testid="stSidebar"] div[data-testid="stTextInputRootElement"] button svg,
+section[data-testid="stSidebar"] div[data-baseweb="input"] button svg {
+    color: inherit !important;
+    fill: currentColor !important;
+}
+
+/* Radiant High-Energy Form Submit Buttons */
+section[data-testid="stSidebar"] [data-testid="stFormSubmitButton"] button,
+section[data-testid="stSidebar"] button[data-testid*="FormSubmit"] {
+    background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 9px !important;
+    font-weight: 700 !important;
     font-size: 0.875rem !important;
-    padding: 0.6rem 1rem !important;
-    transition: all 0.2s ease !important;
+    letter-spacing: -0.01em !important;
+    padding: 0.65rem 1rem !important;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.45) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    display: flex !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    margin-top: 0.5rem !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stFormSubmitButton"] button:hover,
+section[data-testid="stSidebar"] button[data-testid*="FormSubmit"]:hover {
+    background: linear-gradient(135deg, #4338CA 0%, #4F46E5 100%) !important;
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.65) !important;
+    transform: translateY(-1px) !important;
+    color: #FFFFFF !important;
+}
+
+/* Clean Divider for OAuth */
+.sidebar-auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 1.1rem 0 0.85rem 0;
+}
+
+.auth-divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.auth-divider-text {
+    font-size: 0.675rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #64748B;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Authentic Google Sign-in Button */
+.sidebar-google-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    background: #FFFFFF !important;
+    color: #0F172A !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    padding: 0.65rem 1rem !important;
+    border-radius: 9px !important;
+    text-decoration: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+}
+
+.sidebar-google-btn:hover {
+    background: #F1F5F9 !important;
+    color: #0F172A !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
     text-decoration: none !important;
 }
 
-section[data-testid="stSidebar"] [data-testid="stLinkButton"] > a:hover {
-    border-color: var(--nav-border-hover) !important;
-    background-color: rgba(255, 255, 255, 0.08) !important;
+/* Fallback for stLinkButton if used */
+section[data-testid="stSidebar"] [data-testid="stLinkButton"] > a,
+section[data-testid="stSidebar"] [data-testid*="BaseLinkButton"] {
+    background: #FFFFFF !important;
+    color: #0F172A !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 9px !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    padding: 0.65rem 1rem !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+/* Signed-in User Profile Card */
+.sidebar-user-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.sidebar-user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
+    flex-shrink: 0;
+}
+
+.sidebar-user-details {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.sidebar-user-email {
+    color: #F8FAFC;
+    font-size: 0.825rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-user-status {
+    color: #10B981;
+    font-size: 0.725rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 1px;
+}
+
+.user-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 6px #10B981;
+    display: inline-block;
+}
+
+/* Sign out button */
+section[data-testid="stSidebar"] div.st-key-sidebar_signout_btn button {
+    background: rgba(239, 68, 68, 0.08) !important;
+    border: 1px solid rgba(239, 68, 68, 0.25) !important;
+    color: #F87171 !important;
+    font-size: 0.825rem !important;
+    font-weight: 600 !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+section[data-testid="stSidebar"] div.st-key-sidebar_signout_btn button:hover {
+    background: rgba(239, 68, 68, 0.18) !important;
+    border-color: #EF4444 !important;
+    color: #FFFFFF !important;
+    transform: translateY(-1px) !important;
 }
 
 /* ==========================================================================
