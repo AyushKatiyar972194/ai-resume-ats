@@ -130,6 +130,28 @@ header[data-testid="stHeader"] {
     display: none !important;
 }
 
+/* Completely suppress "Press Enter to submit form" typing helper popup */
+[data-testid="InputInstructions"],
+[data-testid="stInputInstructions"],
+div[data-testid="InputInstructions"],
+div[data-testid="stInputInstructions"],
+div[class*="InputInstructions"],
+.stTextInput [data-testid="InputInstructions"],
+.stTextInput div[class*="InputInstructions"],
+section[data-testid="stSidebar"] [data-testid="InputInstructions"],
+section[data-testid="stSidebar"] div[class*="InputInstructions"],
+div[class*="e1bh1cux8"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    line-height: 0 !important;
+}
+
 /* Header action icons */
 header[data-testid="stHeader"] button,
 header[data-testid="stHeader"] [data-testid^="stBaseButton"] {
