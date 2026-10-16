@@ -1633,7 +1633,9 @@ div.cta-dark-card > p {
     }
 
     button[data-testid="stExpandSidebarButton"] svg,
-    button[aria-label="Expand sidebar"] svg {
+    button[aria-label="Expand sidebar"] svg,
+    button[data-testid="stExpandSidebarButton"] svg *,
+    button[aria-label="Expand sidebar"] svg * {
         fill: #FFFFFF !important;
         stroke: #FFFFFF !important;
         color: #FFFFFF !important;
