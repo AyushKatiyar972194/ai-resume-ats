@@ -41,7 +41,7 @@ def _render_issue(issue: Dict[str, Any]) -> None:
 
     impact_badge = f'<span style="font-size:0.775rem; color:#64748B; font-weight:500;">Why it matters: {impact}</span>' if impact else ''
     banner = textwrap.dedent(f"""
-<div style="background:{meta['bg']}; border-left:4px solid {meta['color']}; border:1px solid {meta['border']}; border-left-width:4px; border-radius:8px; padding:0.85rem 1.15rem; margin-bottom:0.5rem; display:flex; justify-content:space-between; align-items:center;">
+<div class="issue-banner-header" style="background:{meta['bg']}; border-left:4px solid {meta['color']}; border:1px solid {meta['border']}; border-left-width:4px;">
     <div style="display:flex; align-items:center; gap:0.6rem;">
         <span style="font-size:1.1rem;">{meta['icon']}</span>
         <span style="font-weight:700; font-size:0.95rem; color:{meta['color']};">{title}</span>

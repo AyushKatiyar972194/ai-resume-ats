@@ -27,7 +27,7 @@ def display_skill_validation(analysis: Dict[str, Any]) -> None:
     badge_border = '#A7F3D0' if pct >= 70 else '#FDE68A' if pct >= 50 else '#FECACA'
 
     metrics_html = textwrap.dedent(f"""
-<div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem 1.75rem; margin-bottom: 1.25rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+<div class="skill-metrics-grid">
     <div>
         <div style="font-size: 0.75rem; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em;">Skills Found</div>
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.75rem; font-weight: 800; color: #0F172A;">{total}</div>

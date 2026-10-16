@@ -71,7 +71,7 @@ if "view" in st.query_params and st.query_params["view"] in ("landing", "scorer"
 # Developer / test preview support for visual verification
 if st.query_params.get("preview") == "sample":
     import json
-    sample_path = Path("C:/Users/Ayush/.gemini/antigravity/brain/c8387dfb-cd88-41e7-8e26-10a7415efbab/sample_analysis.json")
+    sample_path = Path(__file__).parent / "assets" / "sample_analysis.json"
     if sample_path.exists():
         try:
             st.session_state["scorer_analysis"] = json.loads(sample_path.read_text(encoding="utf-8"))

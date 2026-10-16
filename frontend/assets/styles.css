@@ -1507,6 +1507,41 @@ div.cta-dark-card > p {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
+.skill-metrics-grid {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1.25rem 1.75rem;
+    margin-bottom: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.jd-metrics-banner {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.issue-banner-header {
+    border-radius: 8px;
+    padding: 0.85rem 1.15rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
 /* ==========================================================================
    MULTI-DEVICE RESPONSIVE SYSTEM (TABLETS, MOBILES, ALL SCREEN SIZES)
    ========================================================================== */
@@ -1538,6 +1573,11 @@ div.cta-dark-card > p {
     .component-grid {
         grid-template-columns: repeat(2, 1fr) !important;
     }
+
+    .skill-metrics-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.25rem !important;
+    }
 }
 
 /* 2. MOBILES & PHONES (max-width: 768px) */
@@ -1553,7 +1593,7 @@ div.cta-dark-card > p {
     /* Mobile off-canvas drawer sidebar */
     section[data-testid="stSidebar"] {
         width: min(340px, 86vw) !important;
-        box-shadow: 0 0 35px rgba(0, 0, 0, 0.75) !important;
+        box-shadow: 10px 0 35px rgba(0, 0, 0, 0.45) !important;
         border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
         z-index: 999999 !important;
     }
@@ -1566,6 +1606,68 @@ div.cta-dark-card > p {
     header[data-testid="stHeader"] {
         height: 3.25rem !important;
         padding: 0 0.5rem !important;
+    }
+
+    /* Expand sidebar button (in header) */
+    button[data-testid="stExpandSidebarButton"],
+    button[aria-label="Expand sidebar"] {
+        background: #0F172A !important;
+        color: #FFFFFF !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 8px !important;
+        padding: 6px 12px !important;
+        min-height: 38px !important;
+        height: 38px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25) !important;
+        margin: 6px !important;
+        transition: all 0.2s ease !important;
+    }
+
+    button[data-testid="stExpandSidebarButton"]:hover,
+    button[aria-label="Expand sidebar"]:hover {
+        background: #1E293B !important;
+        border-color: #6366F1 !important;
+    }
+
+    button[data-testid="stExpandSidebarButton"] svg,
+    button[aria-label="Expand sidebar"] svg {
+        fill: #FFFFFF !important;
+        stroke: #FFFFFF !important;
+        color: #FFFFFF !important;
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    /* Collapse button (inside sidebar) */
+    button[aria-label="Collapse sidebar"],
+    section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"] {
+        background: rgba(255, 255, 255, 0.08) !important;
+        color: #FFFFFF !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 8px !important;
+        width: 36px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all 0.2s ease !important;
+    }
+
+    button[aria-label="Collapse sidebar"]:hover,
+    section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"]:hover {
+        background: rgba(255, 255, 255, 0.18) !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+    }
+
+    button[aria-label="Collapse sidebar"] svg,
+    section[data-testid="stSidebar"] button[data-testid="stBaseButton-headerNoPadding"] svg {
+        fill: #FFFFFF !important;
+        stroke: #FFFFFF !important;
+        color: #FFFFFF !important;
     }
 
     /* Streamlit columns stacking vertically on mobile */
@@ -1638,6 +1740,16 @@ div.cta-dark-card > p {
         gap: 1.25rem !important;
     }
 
+    .score-radial-wrapper {
+        width: 150px !important;
+        height: 150px !important;
+        margin: 0 auto !important;
+    }
+
+    .score-radial-number {
+        font-size: 2.5rem !important;
+    }
+
     .score-details-col {
         display: flex !important;
         flex-direction: column !important;
@@ -1683,6 +1795,16 @@ div.cta-dark-card > p {
     .comparison-grid {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
+    }
+
+    .bullet-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+    }
+
+    .bullet-item strong {
+        width: 100% !important;
     }
 
     /* Mockup Preview Window in Landing */
@@ -1735,6 +1857,32 @@ div.cta-dark-card > p {
         text-align: center !important;
     }
 
+    /* Skill validation metrics banner on mobile */
+    .skill-metrics-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+        padding: 1.15rem 1rem !important;
+    }
+
+    /* Job match metrics banner on mobile */
+    .jd-metrics-banner {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+        padding: 1.15rem 1rem !important;
+    }
+
+    /* Tabs styling on mobile */
+    div[data-testid="stTabs"] button[role="tab"] {
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.85rem !important;
+        white-space: nowrap !important;
+    }
+
+    /* File uploader compact padding on mobile */
+    [data-testid="stFileUploader"] {
+        padding: 1rem !important;
+    }
+
     /* Touch-friendly buttons (minimum 44px tap targets for mobile usability) */
     .stButton > button,
     [data-testid="stFormSubmitButton"] button,
@@ -1766,14 +1914,10 @@ div.cta-dark-card > p {
         flex: 1 1 100% !important;
     }
 
-    .bullet-item {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 4px !important;
-    }
-
-    .bullet-item strong {
-        width: 100% !important;
+    .skill-metrics-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem !important;
+        text-align: center !important;
     }
 
     /* Radio button options full width on small screens */

@@ -27,7 +27,7 @@ def display_jd_comparison(jd_comparison: Optional[Dict[str, Any]]) -> None:
     # Top Metrics Banner
     st.markdown(
         f"""
-        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+        <div class="jd-metrics-banner">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
                     <span style="font-size: 0.85rem; font-weight: 700; color: #0F172A;">Matching Keywords</span>
