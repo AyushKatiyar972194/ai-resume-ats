@@ -108,13 +108,19 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--surface-bg) !important;
 }
 
-/* Main container spacing and width */
-.main .block-container {
+/* Main container spacing and width - strictly centered on desktop and laptops whether sidebar is open or collapsed */
+.stMainBlockContainer,
+[data-testid="stMainBlockContainer"],
+.main .block-container,
+main .block-container,
+.block-container {
     max-width: 1180px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     padding-top: 4.75rem !important;
     padding-bottom: 4rem !important;
-    padding-left: 2.5rem !important;
-    padding-right: 2.5rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
 }
 
 /* Header toolbar styling - solid opaque surface to eliminate ghosting/partial seeing when scrolling */
@@ -1611,7 +1617,11 @@ div.cta-dark-card > p {
 
 /* 1. TABLETS & LAPTOPS (max-width: 1024px) */
 @media screen and (max-width: 1024px) {
-    .main .block-container {
+    .stMainBlockContainer,
+    [data-testid="stMainBlockContainer"],
+    .main .block-container,
+    main .block-container,
+    .block-container {
         padding-top: 4.25rem !important;
         padding-left: 1.75rem !important;
         padding-right: 1.75rem !important;
@@ -1647,7 +1657,11 @@ div.cta-dark-card > p {
 /* 2. MOBILES & PHONES (max-width: 768px) */
 @media screen and (max-width: 768px) {
     /* Fluid workspace container */
-    .main .block-container {
+    .stMainBlockContainer,
+    [data-testid="stMainBlockContainer"],
+    .main .block-container,
+    main .block-container,
+    .block-container {
         padding-top: 3.5rem !important;
         padding-bottom: 2.5rem !important;
         padding-left: 1rem !important;
@@ -2036,7 +2050,11 @@ div.cta-dark-card > p {
 
 /* 3. EXTRA SMALL SMARTPHONES (max-width: 480px) */
 @media screen and (max-width: 480px) {
-    .main .block-container {
+    .stMainBlockContainer,
+    [data-testid="stMainBlockContainer"],
+    .main .block-container,
+    main .block-container,
+    .block-container {
         padding-left: 0.65rem !important;
         padding-right: 0.65rem !important;
     }
