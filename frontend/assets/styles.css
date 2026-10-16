@@ -1489,9 +1489,9 @@ div.cta-dark-card > p {
     margin: 0 auto 1.75rem auto !important;
 }
 
-/* Bottom CTA Button Positioning */
+/* Bottom CTA Button Positioning - clean spacing below dark card */
 .st-key-cta_bottom {
-    margin-top: -1.75rem !important;
+    margin-top: 1.5rem !important;
 }
 
 /* ==========================================================================
@@ -1861,7 +1861,7 @@ div.cta-dark-card > p {
     }
 
     .st-key-cta_bottom {
-        margin-top: 0.5rem !important;
+        margin-top: 1.25rem !important;
     }
 
     /* Hero section on mobile */
