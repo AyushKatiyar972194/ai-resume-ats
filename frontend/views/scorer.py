@@ -218,18 +218,20 @@ def render() -> None:
         else:
             st.markdown(
                 """
-                <div style="font-weight: 700; font-size: 0.95rem; color: #0F172A; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
-                    <span>📋 What We Review</span>
-                    <span class="badge-pill badge-indigo">5 Key Areas</span>
-                </div>
-                <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:1.25rem; font-size:0.875rem; color:#475569; line-height:1.6; min-height:152px; height:auto; display:flex; flex-direction:column; justify-content:center;">
-                    <div style="font-weight:600; color:#334155;">Scoring standard recruitment criteria:</div>
-                    <div style="margin-top:0.4rem; font-size:0.8rem; color:#64748B; line-height:1.65;">
-                        • Layout & Formatting (20%) — Clean structure that scanners can easily parse<br>
-                        • Keywords & Terms (25%) — In-demand skills and industry terminology<br>
-                        • Impact & Measurable Results (25%) — Strong action verbs with clear metrics<br>
-                        • Skills Backed by Projects (15%) — Real proof for listed skills<br>
-                        • ATS Compatibility (15%) — Standard fonts, headers, and file format
+                <div class="what-we-review-container">
+                    <div class="what-we-review-header">
+                        <span>📋 What We Review</span>
+                        <span class="badge-pill badge-indigo">5 Key Areas</span>
+                    </div>
+                    <div class="what-we-review-card">
+                        <div class="what-we-review-title">Scoring standard recruitment criteria:</div>
+                        <ul class="what-we-review-list">
+                            <li><strong>Layout & Formatting (20%)</strong> — Clean structure that scanners can easily parse</li>
+                            <li><strong>Keywords & Terms (25%)</strong> — In-demand skills and industry terminology</li>
+                            <li><strong>Impact & Measurable Results (25%)</strong> — Strong action verbs with clear metrics</li>
+                            <li><strong>Skills Backed by Projects (15%)</strong> — Real proof for listed skills</li>
+                            <li><strong>ATS Compatibility (15%)</strong> — Standard fonts, headers, and file format</li>
+                        </ul>
                     </div>
                 </div>
                 """,

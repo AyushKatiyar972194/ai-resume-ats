@@ -1542,6 +1542,69 @@ div.cta-dark-card > p {
     flex-wrap: wrap;
 }
 
+/* What We Review card styles */
+.what-we-review-container {
+    width: 100%;
+}
+
+.what-we-review-header {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #0F172A;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.what-we-review-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1.15rem 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.what-we-review-title {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #334155;
+    margin-bottom: 0.6rem;
+}
+
+.what-we-review-list {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.what-we-review-list li {
+    font-size: 0.8rem;
+    color: #64748B;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 1.1rem !important;
+    margin: 0 !important;
+}
+
+.what-we-review-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #4F46E5;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1.3;
+}
+
+.what-we-review-list li strong {
+    color: #1E293B;
+    font-weight: 600;
+}
+
 /* ==========================================================================
    MULTI-DEVICE RESPONSIVE SYSTEM (TABLETS, MOBILES, ALL SCREEN SIZES)
    ========================================================================== */
@@ -1885,6 +1948,21 @@ div.cta-dark-card > p {
     /* File uploader compact padding on mobile */
     [data-testid="stFileUploader"] {
         padding: 1rem !important;
+    }
+
+    /* What We Review card on mobile */
+    .what-we-review-container {
+        margin-top: 1.25rem !important;
+        width: 100% !important;
+    }
+
+    .what-we-review-card {
+        padding: 1rem 1.15rem !important;
+    }
+
+    .what-we-review-list li {
+        font-size: 0.825rem !important;
+        line-height: 1.55 !important;
     }
 
     /* Touch-friendly buttons (minimum 44px tap targets for mobile usability) */
