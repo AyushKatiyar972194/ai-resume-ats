@@ -1570,6 +1570,7 @@ div.cta-dark-card > p {
         padding: 1.75rem !important;
     }
 
+    .breakdown-grid,
     .component-grid {
         grid-template-columns: repeat(2, 1fr) !important;
     }
@@ -1782,6 +1783,7 @@ div.cta-dark-card > p {
     }
 
     /* 5-Vector breakdown grid: 1 column on mobile */
+    .breakdown-grid,
     .component-grid {
         grid-template-columns: 1fr !important;
         gap: 0.85rem !important;
